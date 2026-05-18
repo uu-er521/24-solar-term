@@ -47,7 +47,7 @@
             min-height: 700px;
             /* 使用本地图片：将图片放在与 HTML 同目录，写 url('./background.jpg');
                或放在 images 子文件夹时写 url('./images/bg.jpg'); */
-            background: url('./背景图雨水.jpg') center/cover no-repeat fixed;
+            background: url('./image/1.立春.png') center/cover no-repeat fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -227,6 +227,19 @@
             opacity: 0;
             transform: translateY(35px);
             transition: opacity 0.7s ease, transform 0.6s ease, box-shadow 0.3s;
+        }
+        .card-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 32px;
+            margin-bottom: 1rem;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .card.reveal {
             opacity: 1;
@@ -415,18 +428,18 @@
     <div class="season-gallery">
         <div class="season-row">
             <div class="season-card slide-section">
-                <img src="./背景图雨水.jpg" alt="春">
+                <img src="./image/1.立春.png" alt="春">
             </div>
             <div class="season-card slide-section delay">
-                <img src="./夏天大暑照片.jpg" alt="夏">
+                <img src="./image/10.夏至.png" alt="夏">
             </div>
         </div>
         <div class="season-row">
             <div class="season-card slide-section delay2">
-                <img src="./qiu.jpg" alt="秋">
+                <img src="./image/13.立秋.png" alt="秋">
             </div>
             <div class="season-card slide-section delay3">
-                <img src="./冬天立冬图片.jpg" alt="冬">
+                <img src="./image/22.冬至.png" alt="冬">
             </div>
         </div>
     </div>
@@ -525,6 +538,7 @@
             let seasonIcon = term.season === 'spring' ? '🌸' : (term.season === 'summer' ? '☀️' : (term.season === 'autumn' ? '🍁' : '❄️'));
             html += `
                 <div class="card" data-idx="${idx}">
+                    <div class="card-image"><img src="./image/${idx + 1}.${term.name}.png" alt="${term.name}"></div>
                     <div class="season-icon">${seasonIcon}</div>
                     <h3>${term.name}</h3>
                     <div class="card-date">${term.date}</div>
