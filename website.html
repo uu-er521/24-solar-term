@@ -207,6 +207,26 @@
             object-fit: cover;
             display: block;
         }
+        .season-info {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1.2rem 1.3rem;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.72) 100%);
+            color: #fff;
+        }
+        .season-info h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.4rem;
+            font-family: 'Noto Serif SC', serif;
+        }
+        .season-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.94);
+        }
 
         /* 节气卡片网格 + 微视差滚动触发效果 */
         .grid {
@@ -420,26 +440,42 @@
     <div class="intro-section slide-section">
         <h2>节气总说</h2>
         <div class="intro-text">
-            “二十四节气”是中国人通过观察太阳周年运动，认知一年中时令、气候、物候等方面变化规律所形成的知识体系和社会实践。
-            指导传统农业生产和日常生活，是中华民族的文化瑰宝。2006年入选第一批国家级非遗，2016年正式列入人类非遗代表作名录。
+            斗转星移，寒暑交替，二十四节气以太阳轨迹为尺，以草木生灵为证，镌刻着华夏先民对天地的敬畏、对时序的感知。
+            它不只是农耕历法，更是刻在中国人骨血里的生活哲学，藏着春生夏长、秋收冬藏的智慧，裹着烟火人间的温情。
         </div>
     </div>
 
     <div class="season-gallery">
         <div class="season-row">
             <div class="season-card slide-section">
-                <img src="./image/1.立春.png" alt="春">
+                <img src="./image/1.立春.png" alt="立春">
+                <div class="season-info">
+                    <h3>立春</h3>
+                    <p>东风破冰，蛰虫初醒，立春宣告寒冬退场、万物复苏。</p>
+                </div>
             </div>
             <div class="season-card slide-section delay">
-                <img src="./image/10.夏至.png" alt="夏">
+                <img src="./image/7.立夏.png" alt="立夏">
+                <div class="season-info">
+                    <h3>立夏</h3>
+                    <p>夏日伊始，万物繁茂，民间迎夏、尝新、称人，祈求康健无病。</p>
+                </div>
             </div>
         </div>
         <div class="season-row">
             <div class="season-card slide-section delay2">
-                <img src="./image/13.立秋.png" alt="秋">
+                <img src="./image/13.立秋.png" alt="立秋">
+                <div class="season-info">
+                    <h3>立秋</h3>
+                    <p>秋意初至，暑气未消，贴秋膘、晒秋迎来丰收序章。</p>
+                </div>
             </div>
             <div class="season-card slide-section delay3">
-                <img src="./image/22.冬至.png" alt="冬">
+                <img src="./image/19.立冬.png" alt="立冬">
+                <div class="season-info">
+                    <h3>立冬</h3>
+                    <p>冬季伊始，万物收藏，拜冬进补，寒风中的烟火愈发温暖。</p>
+                </div>
             </div>
         </div>
     </div>
@@ -489,30 +525,30 @@
 <script>
     // 节气完整数据（融合官方文化信息）
     const solarTerms = [
-        { name:"立春", date:"2月3日-5日", season:"spring", shortDesc:"东风解冻，蛰虫始振，鱼陟负冰。", custom:"迎春、鞭春牛、咬春", longDesc:"二十四节气之首，万物起始。民间有打春牛、食春饼习俗，象征农耕启动。" },
-        { name:"雨水", date:"2月18日-20日", season:"spring", shortDesc:"獭祭鱼，鸿雁来，草木萌动。", custom:"回娘屋、占稻色", longDesc:"气温回升，降水增多，川西一带出嫁女回娘家探望。" },
-        { name:"惊蛰", date:"3月5日-6日", season:"spring", shortDesc:"桃始华，仓庚鸣，鹰化为鸠。", custom:"吃梨、祭白虎", longDesc:"春雷乍响，蛰虫惊醒。吃梨寓意远离病害。" },
-        { name:"春分", date:"3月20日-21日", season:"spring", shortDesc:"玄鸟至，雷乃发声，始电。", custom:"竖蛋、吃春菜", longDesc:"昼夜均分，民间立蛋游戏，祈求平衡安康。" },
-        { name:"清明", date:"4月4日-6日", season:"spring", shortDesc:"桐始华，田鼠化鴽，虹始见。", custom:"扫墓、踏青、插柳", longDesc:"既是节气又是节日，追思与迎春相融。" },
-        { name:"谷雨", date:"4月19日-21日", season:"spring", shortDesc:"萍始生，鸣鸠拂羽，戴胜降桑。", custom:"喝谷雨茶、食香椿", longDesc:"雨生百谷，南方采谷雨茶，清火明目。" },
-        { name:"立夏", date:"5月5日-6日", season:"summer", shortDesc:"蝼蝈鸣，蚯蚓出，王瓜生。", custom:"称人、吃蛋", longDesc:"夏季开始，尝新活动，秤人祈福。" },
-        { name:"小满", date:"5月20日-22日", season:"summer", shortDesc:"苦菜秀，靡草死，麦秋至。", custom:"祭车神、吃苦菜", longDesc:"麦类灌浆，小得盈满，宜食苦菜。" },
-        { name:"芒种", date:"6月5日-7日", season:"summer", shortDesc:"螳螂生，鹏始鸣，反舌无声。", custom:"煮青梅、安苗", longDesc:"忙于夏收夏种，皖南有安苗祭祀。" },
-        { name:"夏至", date:"6月21日-22日", season:"summer", shortDesc:"鹿角解，蝉始鸣，半夏生。", custom:"吃夏至面、祭地", longDesc:"白昼最长，北方吃面尝新麦。" },
-        { name:"小暑", date:"7月6日-8日", season:"summer", shortDesc:"温风至，蟋蟀居宇，鹰始鸷。", custom:"食新、吃藕", longDesc:"入初伏，尝新米，清补养生。" },
-        { name:"大暑", date:"7月22日-24日", season:"summer", shortDesc:"腐草为萤，土润溽暑，大雨时行。", custom:"喝暑羊、烧伏香", longDesc:"最热时节，鲁南喝羊汤，广东吃仙草。" },
-        { name:"立秋", date:"8月7日-9日", season:"autumn", shortDesc:"凉风至，白露降，寒蝉鸣。", custom:"贴秋膘、晒秋", longDesc:"秋来暑去，补回夏季损耗。" },
-        { name:"处暑", date:"8月22日-24日", season:"autumn", shortDesc:"鹰乃祭鸟，天地始肃，禾乃登。", custom:"开渔节、吃鸭子", longDesc:"出暑，沿海开渔，鸭肉润燥。" },
-        { name:"白露", date:"9月7日-8日", season:"autumn", shortDesc:"鸿雁来，玄鸟归，群鸟养羞。", custom:"饮白露茶、收清露", longDesc:"夜凉露凝，白露茶甘醇。" },
-        { name:"秋分", date:"9月22日-24日", season:"autumn", shortDesc:"雷始收声，蛰虫坯户，水始涸。", custom:"祭月、吃秋菜", longDesc:"昼夜平分，岭南吃秋菜。" },
-        { name:"寒露", date:"10月8日-9日", season:"autumn", shortDesc:"鸿雁来宾，雀入大水为蛤，菊有黄华。", custom:"登高、饮菊花酒", longDesc:"露水寒冷，秋钓边。" },
-        { name:"霜降", date:"10月23日-24日", season:"autumn", shortDesc:"豺乃祭兽，草木黄落，蛰虫咸俯。", custom:"吃柿子、赏菊", longDesc:"霜打红叶，红柿御寒。" },
-        { name:"立冬", date:"11月7日-8日", season:"winter", shortDesc:"水始冰，地始冻，雉入大水为蜃。", custom:"吃饺子、贺冬", longDesc:"补冬，北方饺子交子之时。" },
-        { name:"小雪", date:"11月22日-23日", season:"winter", shortDesc:"虹藏不见，天气上升，闭塞成冬。", custom:"腌腊肉、吃糍粑", longDesc:"气温下降，腌菜备冬。" },
-        { name:"大雪", date:"12月6日-8日", season:"winter", shortDesc:"鹖鴠不鸣，虎始交，荔挺出。", custom:"观封河、腌肉", longDesc:"大雪节气，腌肉迎年。" },
-        { name:"冬至", date:"12月21日-23日", season:"winter", shortDesc:"蚯蚓结，麋角解，水泉动。", custom:"饺子汤圆、画九", longDesc:"数九寒天，阴极阳生。" },
-        { name:"小寒", date:"1月5日-7日", season:"winter", shortDesc:"雁北乡，鹊始巢，雉始鸲。", custom:"探梅、吃腊八粥", longDesc:"寒气逼人，踏雪寻梅。" },
-        { name:"大寒", date:"1月20日-21日", season:"winter", shortDesc:"鸡乳，征鸟厉疾，水泽腹坚。", custom:"尾牙祭、除尘", longDesc:"岁末大寒，迎新春。" }
+        { name:"立春", date:"2月3日-5日", season:"spring", shortDesc:"东风解冻，蛰虫始振，鱼陟负冰。", custom:"迎春、鞭春牛、咬春", longDesc:"二十四节气之首，万物起始。民间有打春牛、食春饼习俗，象征农耕启动。", content:"东风破冰，蛰虫初醒，立春是二十四节气的开篇，宣告寒冬退场、万物复苏。民间迎春、鞭春牛，祈愿风调雨顺；食春饼、咬春菜，以鲜嫩滋味拥抱新生。这一天，天地间的生机悄然涌动，人间烟火与自然节律同频。", poem:"律回岁晚冰霜少，春到人间草木知。便觉眼前生意满，东风吹水绿参差。—— 张栻《立春偶成》" },
+        { name:"雨水", date:"2月18日-20日", season:"spring", shortDesc:"獭祭鱼，鸿雁来，草木萌动。", custom:"回娘屋、占稻色", longDesc:"气温回升，降水增多，川西一带出嫁女回娘家探望。", content:"气温回升，降水渐增，春雨润物，大地回暖。民间有回娘家、拉保保的习俗，祈佑孩童安康；湿冷渐消，草木抽芽，人间烟火在淅沥春雨中愈发温柔。此时的雨，是天地写给大地的情诗，温柔且有力量。", poem:"小楼一夜听春雨，深巷明朝卖杏花。矮纸斜行闲作草，晴窗细乳戏分茶。—— 陆游《临安春雨初霁》" },
+        { name:"惊蛰", date:"3月5日-6日", season:"spring", shortDesc:"桃始华，仓庚鸣，鹰化为鸠。", custom:"吃梨、祭白虎", longDesc:"春雷乍响，蛰虫惊醒。吃梨寓意远离病害。", content:"春雷乍响，蛰伏生灵破土而出，万物从沉睡中苏醒。古时祭白虎、打小人、熏艾草，驱邪避灾；民间食梨，寓意远离病虫、顺遂安康。一声惊雷，震醒天地，也唤醒了繁忙的春耕。", poem:"微雨众卉新，一雷惊蛰始。田家几日闲，耕种从此起。—— 韦应物《观田家》" },
+        { name:"春分", date:"3月20日-21日", season:"spring", shortDesc:"玄鸟至，雷乃发声，始电。", custom:"竖蛋、吃春菜", longDesc:"昼夜均分，民间立蛋游戏，祈求平衡安康。", content:"昼夜均分，寒暑平衡，春色平分人间。民间竖蛋、放风筝、踏青赏春，祭祀祖先；百花盛放，燕语莺啼，天地间一派明媚祥和。这一天，阴阳相半，万物均衡，藏着中式哲学的中庸之美。", poem:"胜日寻芳泗水滨，无边光景一时新。等闲识得东风面，万紫千红总是春。—— 朱熹《春日》" },
+        { name:"清明", date:"4月4日-6日", season:"spring", shortDesc:"桐始华，田鼠化鴽，虹始见。", custom:"扫墓、踏青、插柳", longDesc:"既是节气又是节日，追思与迎春相融。", content:"气清景明，万物皆显，兼具自然与人文双重内涵。扫墓祭祖、缅怀先人，是血脉的传承；踏青、插柳、放风筝，是对生机的拥抱。食青团、艾饺，以清润滋味，寄思念与希望。", poem:"清明时节雨纷纷，路上行人欲断魂。借问酒家何处有？牧童遥指杏花村。—— 杜牧《清明》" },
+        { name:"谷雨", date:"4月19日-21日", season:"spring", shortDesc:"萍始生，鸣鸠拂羽，戴胜降桑。", custom:"喝谷雨茶、食香椿", longDesc:"雨生百谷，南方采谷雨茶，清火明目。", content:"雨生百谷，农事繁忙，是春季最后一个节气。此时播种移苗、埯瓜点豆，民间赏牡丹、喝谷雨茶，清热除湿。春雨滋养土地，也滋养着人间的丰收期盼，春的生机在此刻抵达顶峰。", poem:"谷雨如丝复似尘，煮瓶浮蜡正尝新。牡丹破萼樱桃熟，未许飞花减却春。—— 范成大《晚春田园杂兴》" },
+        { name:"立夏", date:"5月5日-6日", season:"summer", shortDesc:"蝼蝈鸣，蚯蚓出，王瓜生。", custom:"称人、吃蛋", longDesc:"夏季开始，尝新活动，秤人祈福。", content:"夏日伊始，万物繁茂，气温攀升，绿荫渐浓。民间迎夏、尝新、称人，祈求康健无病；食青梅、品新茶，以清爽滋味迎接盛夏。告别春的温柔，迎来夏的热烈，天地万物肆意生长。", poem:"晴日暖风生麦气，绿阴幽草胜花时。石榴开遍透帘明，树阴满地日当午。—— 王安石《初夏即事》" },
+        { name:"小满", date:"5月20日-22日", season:"summer", shortDesc:"苦菜秀，靡草死，麦秋至。", custom:"祭车神、吃苦菜", longDesc:"麦类灌浆，小得盈满，宜食苦菜。", content:"夏熟作物籽粒渐满，却未成熟，得名“小满”。民间祭车神、祈丰收，寓意知足常乐；麦田泛黄，蚕事繁忙，天地间藏着“满而不盈”的东方智慧。小得盈满，是人生最好的状态。", poem:"夜莺啼绿柳，皓月醒长空。最爱垄头麦，迎风笑落红。—— 欧阳修《五绝・小满》" },
+        { name:"芒种", date:"6月5日-7日", season:"summer", shortDesc:"螳螂生，鹏始鸣，反舌无声。", custom:"煮青梅、安苗", longDesc:"忙于夏收夏种，皖南有安苗祭祀。", content:"有芒之谷可种，夏收夏种至忙，是一年中最繁忙的节气。民间送花神、煮青梅，告别春景，迎接盛夏；麦浪金黄，稻禾青青，汗水浇灌着丰收的希望。", poem:"梅子金黄杏子肥，麦花雪白菜花稀。日长篱落无人过，惟有蜻蜓蛱蝶飞。—— 范成大《四时田园杂兴・其二》" },
+        { name:"夏至", date:"6月21日-22日", season:"summer", shortDesc:"鹿角解，蝉始鸣，半夏生。", custom:"吃夏至面、祭地", longDesc:"白昼最长，北方吃面尝新麦。", content:"白昼最长，黑夜最短，阳气至极，阴气始生。民间祭神祭祖、吃夏至面，寓意“尝新祈福”；蝉鸣阵阵，荷风送香，盛夏的热烈在此刻尽情绽放。", poem:"积雨空林烟火迟，蒸藜炊黍饷东菑。漠漠水田飞白鹭，阴阴夏木啭黄鹂。—— 王维《积雨辋川庄作》" },
+        { name:"小暑", date:"7月6日-8日", season:"summer", shortDesc:"温风至，蟋蟀居宇，鹰始鸷。", custom:"食新、吃藕", longDesc:"入初伏，尝新米，清补养生。", content:"暑气初盛，热浪渐起，盛夏正式登场。民间食新、尝荔枝，祈愿平安；伏天将至，万物在酷暑中积蓄力量，蝉鸣、荷香、晚风，构成夏日最动人的画卷。", poem:"毕竟西湖六月中，风光不与四时同。接天莲叶无穷碧，映日荷花别样红。—— 杨万里《晓出净慈寺送林子方》" },
+        { name:"大暑", date:"7月22日-24日", season:"summer", shortDesc:"腐草为萤，土润溽暑，大雨时行。", custom:"喝暑羊、烧伏香", longDesc:"最热时节，鲁南喝羊汤，广东吃仙草。", content:"一年中最热时节，酷热难耐，万物生长至盛。民间饮伏茶、晒伏姜、赏荷避暑，以清凉对抗酷暑；暴雨频至，万物蓬勃，生命在极致炎热中绽放活力。", poem:"仲夏苦夜短，开轩纳微凉。虚明见纤毫，羽虫亦飞扬。—— 杜甫《夏夜叹》" },
+        { name:"立秋", date:"8月7日-9日", season:"autumn", shortDesc:"凉风至，白露降，寒蝉鸣。", custom:"贴秋膘、晒秋", longDesc:"秋来暑去，补回夏季损耗。", content:"秋意初至，暑气未消，“立秋”是秋季的开篇。民间啃秋、贴秋膘、晒秋，以烟火气迎接丰收；梧桐叶落，凉风渐起，天地从热烈转向沉静，收获的序章由此开启。", poem:"银烛秋光冷画屏，轻罗小扇扑流萤。天阶夜色凉如水，卧看牵牛织女星。—— 杜牧《秋夕》" },
+        { name:"处暑", date:"8月22日-24日", season:"autumn", shortDesc:"鹰乃祭鸟，天地始肃，禾乃登。", custom:"开渔节、吃鸭子", longDesc:"出暑，沿海开渔，鸭肉润燥。", content:"暑气至此而止，秋凉正式登场。民间祭祖、迎秋、放河灯，开渔节启航，告别盛夏，拥抱清秋。天地褪去燥热，回归清爽，人间多了几分闲适。", poem:"尘世难逢开口笑，菊花须插满头归。但将酩酊酬佳节，不用登临恨落晖。—— 杜牧《九日齐山登高》" },
+        { name:"白露", date:"9月7日-8日", season:"autumn", shortDesc:"鸿雁来，玄鸟归，群鸟养羞。", custom:"饮白露茶、收清露", longDesc:"夜凉露凝，白露茶甘醇。", content:"水汽凝露，洁白如玉，秋意渐浓。民间收清露、饮白露茶、吃番薯，润燥养生；草木染霜，鸿雁南飞，天地间多了几分清冷诗意。", poem:"戍鼓断人行，边秋一雁声。露从今夜白，月是故乡明。—— 杜甫《月夜忆舍弟》" },
+        { name:"秋分", date:"9月22日-24日", season:"autumn", shortDesc:"雷始收声，蛰虫坯户，水始涸。", custom:"祭月、吃秋菜", longDesc:"昼夜平分，岭南吃秋菜。", content:"昼夜均分，秋色平分，是秋季的中点。民间祭月、送秋牛、粘雀子嘴，祈愿丰收；丹桂飘香，蟹肥菊黄，天地间满是丰收的喜悦与平和。", poem:"自古逢秋悲寂寥，我言秋日胜春朝。晴空一鹤排云上，便引诗情到碧霄。—— 刘禹锡《秋词・其一》" },
+        { name:"寒露", date:"10月8日-9日", season:"autumn", shortDesc:"鸿雁来宾，雀入大水为蛤，菊有黄华。", custom:"登高、饮菊花酒", longDesc:"露水寒冷，秋钓边。", content:"露气寒冷，将凝结为霜，秋意深浓。民间登高、赏枫、饮秋茶，强身健体；草木枯黄，雁阵南迁，天地间尽显萧瑟之美，也藏着对冬日的期盼。", poem:"风急天高猿啸哀，渚清沙白鸟飞回。无边落木萧萧下，不尽长江滚滚来。—— 杜甫《登高》" },
+        { name:"霜降", date:"10月23日-24日", season:"autumn", shortDesc:"豺乃祭兽，草木黄落，蛰虫咸俯。", custom:"吃柿子、赏菊", longDesc:"霜打红叶，红柿御寒。", content:"秋季最后一个节气，霜华满地，万物收敛。民间赏菊、吃柿子、进补养生，抵御寒气；草木凋零，蛰虫休眠，天地为冬日的蛰伏做好准备。", poem:"远上寒山石径斜，白云生处有人家。停车坐爱枫林晚，霜叶红于二月花。—— 杜牧《山行》" },
+        { name:"立冬", date:"11月7日-8日", season:"winter", shortDesc:"水始冰，地始冻，雉入大水为蜃。", custom:"吃饺子、贺冬", longDesc:"补冬，北方饺子交子之时。", content:"冬季伊始，万物收藏，寒气渐生。民间拜冬、酿黄酒、进补食俗，积蓄能量；大地褪去繁华，回归沉静，人间烟火在寒风中愈发温暖。", poem:"冻笔新诗懒写，寒炉美酒时温。醉看墨花月白，恍疑雪满前村。—— 李白《立冬》" },
+        { name:"小雪", date:"11月22日-23日", season:"winter", shortDesc:"虹藏不见，天气上升，闭塞成冬。", custom:"腌腊肉、吃糍粑", longDesc:"气温下降，腌菜备冬。", content:"气温骤降，初雪飘落，雪量尚小。民间腌腊肉、晒干货，为冬日储备滋味；天地素白，万物静谧，冬日的诗意悄然绽放。", poem:"绿蚁新醅酒，红泥小火炉。晚来天欲雪，能饮一杯无？—— 白居易《问刘十九》" },
+        { name:"大雪", date:"12月6日-8日", season:"winter", shortDesc:"鹖鴠不鸣，虎始交，荔挺出。", custom:"观封河、腌肉", longDesc:"大雪节气，腌肉迎年。", content:"雪盛地寒，万物冰封，天地一片苍茫。民间赏雪、滑冰、进补羊肉，抵御严寒；银装素裹，山河静谧，冬日的壮阔在此刻尽显。", poem:"千山鸟飞绝，万径人踪灭。孤舟蓑笠翁，独钓寒江雪。—— 柳宗元《江雪》" },
+        { name:"冬至", date:"12月21日-23日", season:"winter", shortDesc:"蚯蚓结，麋角解，水泉动。", custom:"饺子汤圆、画九", longDesc:"数九寒天，阴极阳生。", content:"白昼最短，黑夜最长，阴极之至，阳气始生。民间祭天祭祖、吃饺子汤圆，数九寒天自此开始；这一天，人间团圆，烟火温暖，藏着对春天的期盼。", poem:"邯郸驿里逢冬至，抱膝灯前影伴身。想得家中夜深坐，还应说着远行人。—— 白居易《邯郸冬至夜思家》" },
+        { name:"小寒", date:"1月5日-7日", season:"winter", shortDesc:"雁北乡，鹊始巢，雉始鸲。", custom:"探梅、吃腊八粥", longDesc:"寒气逼人，踏雪寻梅。", content:"寒气渐盛，未达极致，是冬日的纵深。民间赏梅、进补、熬煮腊八粥，暖身暖心；天地严寒，却有暗香浮动，生命在寒冬中坚守希望。", poem:"墙角数枝梅，凌寒独自开。遥知不是雪，为有暗香来。—— 王安石《梅花》" },
+        { name:"大寒", date:"1月20日-21日", season:"winter", shortDesc:"鸡乳，征鸟厉疾，水泽腹坚。", custom:"尾牙祭、除尘", longDesc:"岁末大寒，迎新春。", content:"一年中最后一个节气，寒气至极，岁末将至。民间扫尘、备年货、迎新年，辞旧迎新；严寒过后，便是立春，四季轮回至此圆满，新的希望悄然孕育。", poem:"岁暮风动地，夜寒雪连天。老夫何处宿，暖帐温炉前。—— 白居易《村居卧病三首・其三》" }
     ];
 
     // 非遗名录数据 (来源于官网)
@@ -577,7 +613,7 @@
         const modal = document.getElementById('detailModal');
         document.getElementById('modalName').innerText = term.name;
         document.getElementById('modalDate').innerHTML = `<i class="far fa-calendar-alt"></i> ${term.date}`;
-        document.getElementById('modalDesc').innerHTML = term.longDesc + " " + term.shortDesc;
+        document.getElementById('modalDesc').innerHTML = `<p>${term.content}</p><p>${term.longDesc}</p><p style="margin-top:1rem; color:#7a5b30; font-style:italic;">${term.poem}</p>`;
         document.getElementById('modalCustom').innerHTML = term.custom + "。体现了顺应自然、尊重物候的传统智慧。";
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
