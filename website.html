@@ -277,6 +277,89 @@
             cursor: pointer;
             font-size: 1rem;
         }
+        #termFullView .term-full-nav {
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(90%, 1100px);
+            z-index: 1300;
+            background: rgba(0,0,0,0.34);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        #termFullView .term-full-nav:hover .thumbs-wrap {
+            max-height: 340px;
+            opacity: 1;
+        }
+        #termFullView .nav-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 1rem;
+            color: #f9f2de;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+        }
+        #termFullView .nav-head span {
+            color: #ffdca4;
+            font-weight: 600;
+        }
+        #termFullView .thumbs-wrap {
+            max-height: 0;
+            overflow-y: auto;
+            transition: max-height 280ms ease, opacity 220ms ease;
+            opacity: 0;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            background: rgba(0,0,0,0.45);
+        }
+        #termFullView .nav-thumb-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.65rem;
+            padding: 0.75rem 1rem 0.95rem;
+        }
+        #termFullView .nav-thumb {
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.08);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+            cursor: pointer;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+            display: grid;
+            grid-template-rows: 110px auto;
+        }
+        #termFullView .nav-thumb:hover,
+        #termFullView .nav-thumb.active {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(0,0,0,0.22);
+        }
+        #termFullView .nav-thumb .thumb-image {
+            background-size: cover;
+            background-position: center;
+            min-height: 110px;
+        }
+        #termFullView .nav-thumb .thumb-label {
+            padding: 0.8rem 0.85rem;
+            color: #fff;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            background: rgba(0,0,0,0.4);
+        }
+        #termFullView .nav-thumb .thumb-label strong {
+            display: block;
+            color: #ffe5b0;
+            font-size: 0.92rem;
+            margin-bottom: 0.25rem;
+        }
+        #termFullView .nav-thumb .thumb-label small {
+            display: block;
+            color: rgba(255,255,255,0.72);
+            font-size: 0.78rem;
+        }
         /* 左右点击区域切换 */
         #termFullView .nav-left, #termFullView .nav-right {
             position: absolute;
@@ -509,6 +592,14 @@
     <div class="overlay" onclick="closeFullTerm()"></div>
     <div class="nav-left" onclick="prevTerm(event)"></div>
     <div class="nav-right" onclick="nextTerm(event)"></div>
+    <div class="term-full-nav">
+        <div class="nav-head">
+            <div>当前节气：<span id="termFullIndex">1</span>/24</div>
+        </div>
+        <div class="thumbs-wrap">
+            <div class="nav-thumb-list" id="termThumbList"></div>
+        </div>
+    </div>
     <button class="close-full" onclick="closeFullTerm()" aria-label="关闭">✕</button>
     <div class="term-card" id="termCard">
         <h2 id="termFullName">节气</h2>
@@ -673,6 +764,7 @@
                 if (idx !== null) showFullTerm(solarTerms[parseInt(idx)], parseInt(idx));
             });
         });
+        renderFullNav();
         // 滚动显示动画 Intersection Observer
         const cards = document.querySelectorAll('.card');
         const observer = new IntersectionObserver((entries) => {
@@ -707,11 +799,13 @@
         const view = document.getElementById('termFullView');
         const bgPath = `./image/${idx + 1}.${term.name}.png`;
         view.style.backgroundImage = `url('${bgPath}')`;
+        document.getElementById('termFullIndex').innerText = idx + 1;
         document.getElementById('termFullName').innerText = term.name;
         document.getElementById('termFullDate').innerText = term.date;
         document.getElementById('termFullContent').innerText = term.content || term.longDesc || term.shortDesc;
         document.getElementById('termFullPoem').innerText = term.poem || '';
         currentFullIdx = idx;
+        highlightThumb(idx);
     }
 
     function showFullTerm(term, idx) {
@@ -744,6 +838,26 @@
             view.setAttribute('aria-hidden','true');
             document.body.style.overflow = '';
         }, 420);
+    }
+
+    function renderFullNav() {
+        const thumbList = document.getElementById('termThumbList');
+        if (!thumbList) return;
+        thumbList.innerHTML = solarTerms.map((term, idx) => `
+            <div class="nav-thumb" data-idx="${idx}" onclick="showFullTerm(solarTerms[${idx}], ${idx})">
+                <div class="thumb-image" style="background-image:url('./image/${idx + 1}.${term.name}.png')"></div>
+                <div class="thumb-label">
+                    <strong>${idx + 1}. ${term.name}</strong>
+                    <small>${term.date}</small>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function highlightThumb(idx) {
+        document.querySelectorAll('#termThumbList .nav-thumb').forEach((thumb) => {
+            thumb.classList.toggle('active', parseInt(thumb.getAttribute('data-idx')) === idx);
+        });
     }
 
     function prevTerm(e) { if (e) e.stopPropagation(); if (currentFullIdx < 0) return; const idx = (currentFullIdx - 1 + solarTerms.length) % solarTerms.length; showFullTerm(solarTerms[idx], idx); }
