@@ -726,10 +726,45 @@
         }
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem 2rem;
             color: #a28057;
             border-top: 1px solid #e3d3c0;
             margin-top: 3rem;
+            position: relative;
+        }
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            margin: 0 auto 1.2rem;
+            padding: 0.85rem 1.4rem;
+            border-radius: 999px;
+            background: rgba(255, 248, 235, 0.96);
+            border: 1px solid rgba(162, 128, 87, 0.24);
+            color: #6b4d2c;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms ease, background 280ms ease;
+        }
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: rgba(255, 255, 245, 1);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.12);
+        }
+        .back-to-top span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #f9d48e 0%, #dba85e 45%, #8d5b2d 100%);
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
         }
 
         @keyframes fadeInUp {
@@ -843,12 +878,26 @@
         <div class="flower-item"><i class="fas fa-feather-alt" style="font-size: 2rem; color:#b3772e;"></i><h4>雨水三候</h4><p>一候菜花<br>二候杏花<br>三候李花</p></div>
         <div class="flower-item"><i class="fas fa-tree" style="font-size: 2rem; color:#b3772e;"></i><h4>惊蛰三候</h4><p>一候桃花<br>二候棣棠<br>三候蔷薇</p></div>
         <div class="flower-item"><i class="fas fa-cloud-sun" style="font-size: 2rem; color:#b3772e;"></i><h4>春分三候</h4><p>一候海棠<br>二候梨花<br>三候木兰</p></div>
+        <div class="flower-item"><i class="fas fa-seedling" style="font-size: 2rem; color:#b3772e;"></i><h4>立夏三候</h4><p>一候蝼蝈鸣<br>二候蚯蚓出<br>三候戴胜降</p></div>
+        <div class="flower-item"><i class="fas fa-wind" style="font-size: 2rem; color:#b3772e;"></i><h4>芒种三候</h4><p>一候螳螂生<br>二候反舌无声<br>三候蜩始鸣</p></div>
+        <div class="flower-item"><i class="fas fa-sun" style="font-size: 2rem; color:#b3772e;"></i><h4>夏至三候</h4><p>一候鹿角解<br>二候半夏生<br>三候莓始华</p></div>
+        <div class="flower-item"><i class="fas fa-umbrella" style="font-size: 2rem; color:#b3772e;"></i><h4>立秋三候</h4><p>一候凉风至<br>二候白露降<br>三候寒蝉响</p></div>
+        <div class="flower-item"><i class="fas fa-apple-alt" style="font-size: 2rem; color:#b3772e;"></i><h4>处暑三候</h4><p>一候鹰乃祭鸟<br>二候天地始肃<br>三候禾乃报歉</p></div>
+        <div class="flower-item"><i class="fas fa-leaf" style="font-size: 2rem; color:#b3772e;"></i><h4>秋分三候</h4><p>一候玄鸟归<br>二候雷始收<br>三候蛰虫坯</p></div>
+        <div class="flower-item"><i class="fas fa-snowflake" style="font-size: 2rem; color:#b3772e;"></i><h4>立冬三候</h4><p>一候水始冰<br>二候地始冻<br>三候雉入大水为蜃</p></div>
+        <div class="flower-item"><i class="fas fa-moon" style="font-size: 2rem; color:#b3772e;"></i><h4>大寒三候</h4><p>一候鹖鵲不鸣<br>二候虎始交<br>三候荔挺生</p></div>
     </div>
 </div>
 
 <footer>
-    <i class="fas fa-moon"></i> 非遗传承 · 二十四节气智慧  <i class="fas fa-sun"></i><br>
-    中国非物质文化遗产网灵感设计 | 沉浸式滚动体验
+    <button class="back-to-top" id="backToTopBtn" aria-label="返回顶部">
+        <span>⟳</span>
+        返回立春
+    </button>
+    <div>⛅ 立春为首，回到节气初始，重新拥抱春的节拍</div>
+    <div style="margin-top:0.8rem; font-size:0.92rem; color:#8f7050;">非遗传承 · 二十四节气智慧 · 风物一页一节</div>
+    <div style="margin-top:0.6rem;">中国非物质文化遗产网灵感设计 | 沉浸式滚动体验</div>
+    <div style="margin-top:0.6rem; font-size:0.92rem; color:#8f7050;">第一队</div>
 </footer>
 
 <!-- 模态框 -->
@@ -1047,6 +1096,10 @@
     document.querySelector('.close-modal')?.addEventListener('click', closeModalFunc);
     window.addEventListener('click', (e) => {
         if (e.target === document.getElementById('detailModal')) closeModalFunc();
+    });
+
+    document.getElementById('backToTopBtn')?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // 渲染横向可扩展的非遗竖块区域
