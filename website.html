@@ -471,33 +471,208 @@
             color: #c1945b;
             margin-right: 10px;
         }
-        .swiper {
-            width: 100%;
-            padding: 1rem 0.5rem 2rem;
+        .heritage-bar {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin-top: 1.5rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            min-height: 420px;
+            padding-bottom: 0.35rem;
+            transition: transform 260ms ease;
+            scroll-behavior: smooth;
+            perspective: 1800px;
+            background: linear-gradient(90deg, rgba(254,245,232,0.96), rgba(248,236,209,0.98));
+            border-radius: 40px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.65), 0 28px 60px rgba(0,0,0,0.12);
         }
-        .swiper-slide {
-            background: white;
-            border-radius: 36px;
-            padding: 1.5rem;
+        .heritage-bar::-webkit-scrollbar { height: 10px; }
+        .heritage-bar::-webkit-scrollbar-thumb { background: rgba(148, 110, 54, 0.35); border-radius: 999px; }
+        .heritage-section:hover .heritage-bar {
+            transform: scale(1.01);
+        }
+        .heritage-bar:hover .heritage-block:not(:hover) {
+            flex: 0.35 1 0;
+            opacity: 0.72;
+            transform: translateY(8px) rotateX(3deg) scale(0.96);
+        }
+        .heritage-bar:hover .heritage-block:nth-child(odd):not(:hover) {
+            transform: translateY(10px) rotateX(3deg) rotateY(4deg) scale(0.96);
+        }
+        .heritage-bar:hover .heritage-block:nth-child(even):not(:hover) {
+            transform: translateY(10px) rotateX(3deg) rotateY(-4deg) scale(0.96);
+        }
+        .heritage-block {
+            position: relative;
+            flex: 1 1 calc((100% - 0rem) / 11);
+            min-width: 6rem;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0;
+            overflow: hidden;
+            background: transparent;
+            transform-style: preserve-3d;
+            transition: flex 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease;
+            transform-origin: center center;
+            cursor: pointer;
+        }
+        .heritage-block:first-child {
+            border-top-left-radius: 40px;
+            border-bottom-left-radius: 40px;
+        }
+        .heritage-block:last-child {
+            border-top-right-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+        .heritage-block:hover,
+        .heritage-block:focus-within {
+            flex: 6 1 0;
+            transform: translateY(-28px) rotateX(10deg) rotateY(2deg) scale(1.08);
+            box-shadow: 0 50px 140px rgba(0,0,0,0.34);
+            opacity: 1;
+            z-index: 3;
+        }
+        .heritage-block:hover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15), 0 18px 40px rgba(0,0,0,0.18);
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 260ms ease;
+        }
+        .heritage-block::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.045);
+            pointer-events: none;
+        }
+        .heritage-block .block-image {
+            min-height: 260px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 260ms ease;
+        }
+        .heritage-block:hover .block-image {
+            transform: scale(1.08) translateY(-6px);
+        }
+        .heritage-block .block-caption {
+            padding: 1.4rem 1.2rem 1.2rem;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-            border: 1px solid #f0e2cf;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(248,241,228,0.92));
+            border-top: 1px solid rgba(255,255,255,0.45);
         }
-        .swiper-slide h4 {
-            font-size: 1.5rem;
-            margin: 1rem 0 0.5rem;
-            color: #5b3c1a;
+        .heritage-block h4 {
+            margin: 0;
+            font-size: 1.18rem;
+            color: #3f2b1a;
+            line-height: 1.2;
         }
-        .swiper-slide p {
-            font-size: 0.85rem;
-            color: #66513a;
+        .heritage-block p {
+            margin: 0;
+            color: #6b5134;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            max-height: 5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .swiper-button-next, .swiper-button-prev {
-            color: #bc8b54;
+        .heritage-block .block-extra {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1rem 1rem 1.2rem;
+            background: rgba(16,16,16,0.75);
+            color: #fff;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 260ms ease, opacity 260ms ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
         }
-        .swiper-pagination-bullet-active {
-            background: #b87a42;
+        .heritage-block:hover .block-extra,
+        .heritage-block:focus-within .block-extra {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .heritage-block .block-extra h5 {
+            margin: 0;
+            font-size: 1rem;
+            color: #ffe9b7;
+            letter-spacing: 0.04em;
+        }
+        .heritage-block .block-extra p {
+            margin: 0;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+        .heritage-block .detail-image {
+            min-height: 120px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 18px;
+            opacity: 0.95;
+        }
+        @media (max-width: 1300px) {
+            .heritage-bar {
+                flex-wrap: wrap;
+            }
+            .heritage-block {
+                min-width: calc(33.333% - 0.75rem);
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                flex: 1 1 calc(33.333% - 0.75rem);
+            }
+        }
+        @media (max-width: 900px) {
+            .heritage-block {
+                min-width: calc(50% - 0.75rem);
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                flex: 1 1 calc(50% - 0.75rem);
+            }
+        }
+        @media (max-width: 640px) {
+            .heritage-bar {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                min-height: auto;
+            }
+            .heritage-block {
+                min-width: 80vw;
+                flex: 0 0 80vw;
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                flex: 0 0 90vw;
+            }
+        }
+        @media (max-width: 720px) {
+            .heritage-bar {
+                flex-direction: column;
+            }
+            .heritage-block {
+                min-width: 100%;
+                flex: 1 1 auto;
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                transform: none;
+            }
         }
 
         /* 节气韵味花信风格 */
@@ -656,17 +831,10 @@
     <!-- 节气网格卡片 (动态js生成) -->
     <div class="grid" id="solarGrid"></div>
 
-    <!-- 非遗扩展模块 类似官网滑动效果 -->
+    <!-- 非遗扩展模块 横向弹性竖块 -->
     <div class="heritage-section slide-section">
         <div class="section-title"><i class="fas fa-umbrella"></i> 节气非遗名录 · 活态传承</div>
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="swiperWrapper">
-                <!-- 动态js生成非遗项目轮播 -->
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
+        <div class="heritage-bar" id="heritageBar" role="list"></div>
     </div>
 
     <!-- 花信风及物候文化展示 -->
@@ -726,17 +894,17 @@
 
     // 非遗名录数据 (来源于官网)
     const heritageItems = [
-        { name:"九华立春祭", desc:"浙江衢州立春民俗，保存完整迎春接福仪式。" },
-        { name:"班春劝农", desc:"遂昌传统迎春文化，颁布春令劝农耕。" },
-        { name:"石阡说春", desc:"贵州侗族立春说春，劝农祈福。" },
-        { name:"苗族赶秋", desc:"立秋时节苗族青年社交与庆丰收。" },
-        { name:"安仁赶分社", desc:"湖南春分祭神祈谷盛大节令空间。" },
-        { name:"壮族霜降节", desc:"广西壮族霜降节，边关特色。" },
-        { name:"三门祭冬", desc:"冬至拜冬祭祖，传承完整。" },
-        { name:"半山立夏习俗", desc:"杭州半山送春迎夏习俗。" },
-        { name:"送大暑船", desc:"椒江一带小暑大暑送瘟祈福。" },
-        { name:"梅源芒种开犁节", desc:"云和芒种启动夏耕民俗。" },
-        { name:"内乡打春牛习俗", desc:"内乡立春打春牛劝农耕。" }
+        { name:"九华立春祭", desc:"春风灯火，祈福九华。", detail:"嘉礼鼓声起，村落在迎春的火焰与香烟中，祈愿河山岁丰。" },
+        { name:"班春劝农", desc:"春令鼓声，劝耕千里。", detail:"古老的乡间集市，将春天的愿望化作铿锵的农耕鼓点。" },
+        { name:"石阡说春", desc:"侗乡说春，天地归暖。", detail:"说春的言辞与歌舞，将自然的节律细数成春的仪式。" },
+        { name:"苗族赶秋", desc:"红裳赶秋，丰年蝴蝶。", detail:"赶秋的旌旗与花鼓，让丰收的期盼在秋日里盛开。" },
+        { name:"安仁赶分社", desc:"春分旗队，礼赞田禾。", detail:"祭神巡游中，春耕的希望与乡愁并肩前行。" },
+        { name:"壮族霜降节", desc:"霜叶登高，歌声入云。", detail:"在凉风与霜露中，壮乡用歌舞迎接秋收的诗意。" },
+        { name:"三门祭冬", desc:"冬至祭礼，炉火映寒。", detail:"冬至之夜，祭祀与温酒让寒冬有了温暖的烛光。" },
+        { name:"半山立夏习俗", desc:"夏声初起，鼓声远扬。", detail:"立夏之际，人们用歌舞与礼俗拥抱夏日的苏醒。" },
+        { name:"送大暑船", desc:"大暑送瘟，锣鼓扬帆。", detail:"彩船起行，是沿海村落向酷暑与瘟疫宣战的仪式。" },
+        { name:"梅源芒种开犁节", desc:"芒种启耕，牛耕田畴。", detail:"开犁的牛蹄踏出希望，田野翻新出夏日的绿意。" },
+        { name:"内乡打春牛习俗", desc:"打春牛醒，春耕再启。", detail:"锣鼓震天，打春牛的声响唤醒沉睡的大地。" }
     ];
 
     // 渲染节气网格 + 滚动视差动画
@@ -881,24 +1049,28 @@
         if (e.target === document.getElementById('detailModal')) closeModalFunc();
     });
 
-    // 初始化swiper非遗轮播
-    function initSwiper() {
-        const swiperWrapper = document.getElementById('swiperWrapper');
-        if (swiperWrapper) {
-            let slidesHtml = '';
-            heritageItems.forEach(item => {
-                slidesHtml += `<div class="swiper-slide"><i class="fas fa-scroll" style="font-size: 2rem; color:#b87c48;"></i><h4>${item.name}</h4><p>${item.desc}</p></div>`;
-            });
-            swiperWrapper.innerHTML = slidesHtml;
-        }
-        new Swiper('.mySwiper', {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 20,
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-            pagination: { el: '.swiper-pagination', clickable: true },
-            breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
-        });
+    // 渲染横向可扩展的非遗竖块区域
+    function renderHeritageFan() {
+        const heritageBar = document.getElementById('heritageBar');
+        if (!heritageBar) return;
+        heritageBar.innerHTML = heritageItems.map((item, index) => {
+            const mainImage = `./custom-image/习俗${index + 1}.1.jpg`;
+            const hoverImage = `./custom-image/习俗${index + 1}.2.jpg`;
+            return `
+                <div class="heritage-block" tabindex="0" role="listitem">
+                    <div class="block-image" style="background-image:url('${mainImage}')"></div>
+                    <div class="block-caption">
+                        <h4>${item.name}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                    <div class="block-extra">
+                        <h5>${item.name}</h5>
+                        <div class="detail-image" style="background-image:url('${hoverImage}')"></div>
+                        <p>${item.detail}</p>
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
 
     // 滚动引导
@@ -907,7 +1079,7 @@
     });
 
     renderCards();
-    initSwiper();
+    renderHeritageFan();
     
     // 添加背景视差额外效果: 滚动时hero变换透明度（高级感）
     window.addEventListener('scroll', () => {
