@@ -47,7 +47,7 @@
             min-height: 700px;
             /* 使用本地图片：将图片放在与 HTML 同目录，写 url('./background.jpg');
                或放在 images 子文件夹时写 url('./images/bg.jpg'); */
-            background: url('./image/1.立春.png') center/cover no-repeat fixed;
+            background: url('./image/背景图雨水.jpg') center/cover no-repeat fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -229,6 +229,74 @@
         }
 
         /* 节气卡片网格 + 微视差滚动触发效果 */
+        /* 全屏节气展示 */
+        #termFullView {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1200;
+            background: #000 center/cover no-repeat fixed;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 420ms ease;
+        }
+        #termFullView.active { opacity: 1; }
+        #termFullView .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(6,6,6,0.45);
+            backdrop-filter: blur(4px);
+        }
+        #termFullView .term-card {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            width: calc(100% - 4rem);
+            margin: 2rem;
+            background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.18));
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+        #termFullView .term-card h2 { margin: 0 0 0.6rem; font-family: 'Noto Serif SC', serif; font-size: 2.6rem; }
+        #termFullView .term-card p { color: rgba(255,255,255,0.95); line-height:1.8; }
+        #termFullView .term-card .term-content { font-size: 1.05rem; max-height: 42vh; overflow: auto; }
+        #termFullView .term-card .term-poem { margin-top:1rem; color:#f6e8d1; font-style:italic; font-size:0.98rem; }
+        #termFullView .close-full {
+            position: absolute;
+            top: 26px;
+            right: 28px;
+            z-index: 1300;
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 0.6rem 0.9rem;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        /* 左右点击区域切换 */
+        #termFullView .nav-left, #termFullView .nav-right {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 28%;
+            z-index: 1250;
+            cursor: pointer;
+        }
+        #termFullView .nav-left { left: 0; }
+        #termFullView .nav-right { right: 0; }
+        /* 小提示箭头（可保留或隐藏） */
+        #termFullView .nav-left:after, #termFullView .nav-right:after {
+            content: '';
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; opacity: 0.18;
+            background-size: contain; background-repeat: no-repeat;
+        }
+        #termFullView .nav-left:after { left: 24px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><polyline points="32,12 16,24 32,36" stroke="%23fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+        #termFullView .nav-right:after { right: 24px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><polyline points="16,12 32,24 16,36" stroke="%23fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -436,6 +504,20 @@
     </div>
 </div>
 
+<!-- 全屏节气展示容器（点击卡片切换到此视图） -->
+<div id="termFullView" role="dialog" aria-hidden="true">
+    <div class="overlay" onclick="closeFullTerm()"></div>
+    <div class="nav-left" onclick="prevTerm(event)"></div>
+    <div class="nav-right" onclick="nextTerm(event)"></div>
+    <button class="close-full" onclick="closeFullTerm()" aria-label="关闭">✕</button>
+    <div class="term-card" id="termCard">
+        <h2 id="termFullName">节气</h2>
+        <p id="termFullDate" style="color:#f3e6c8; margin:0.2rem 0 1rem;"></p>
+        <div id="termFullContent" class="term-content"></div>
+        <div id="termFullPoem" class="term-poem"></div>
+    </div>
+</div>
+
 <div class="container">
     <div class="intro-section slide-section">
         <h2>节气总说</h2>
@@ -588,7 +670,7 @@
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', (e) => {
                 const idx = card.getAttribute('data-idx');
-                if (idx !== null) showModal(solarTerms[parseInt(idx)]);
+                if (idx !== null) showFullTerm(solarTerms[parseInt(idx)], parseInt(idx));
             });
         });
         // 滚动显示动画 Intersection Observer
@@ -618,6 +700,63 @@
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
+    
+    // 全屏展示节气（淡入淡出、左右切换、键盘导航）
+    let currentFullIdx = -1;
+    function updateFullContent(term, idx) {
+        const view = document.getElementById('termFullView');
+        const bgPath = `./image/${idx + 1}.${term.name}.png`;
+        view.style.backgroundImage = `url('${bgPath}')`;
+        document.getElementById('termFullName').innerText = term.name;
+        document.getElementById('termFullDate').innerText = term.date;
+        document.getElementById('termFullContent').innerText = term.content || term.longDesc || term.shortDesc;
+        document.getElementById('termFullPoem').innerText = term.poem || '';
+        currentFullIdx = idx;
+    }
+
+    function showFullTerm(term, idx) {
+        const view = document.getElementById('termFullView');
+        // 如果已打开则做淡出换图再淡入
+        if (view.style.display === 'flex' && view.classList.contains('active')) {
+            view.classList.remove('active');
+            setTimeout(() => {
+                updateFullContent(term, idx);
+                // 强制重绘后淡入
+                void view.offsetWidth;
+                view.classList.add('active');
+            }, 260);
+            return;
+        }
+        updateFullContent(term, idx);
+        view.style.display = 'flex';
+        view.setAttribute('aria-hidden','false');
+        // 触发过渡
+        requestAnimationFrame(() => view.classList.add('active'));
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeFullTerm() {
+        const view = document.getElementById('termFullView');
+        if (!view) return;
+        view.classList.remove('active');
+        setTimeout(() => {
+            view.style.display = 'none';
+            view.setAttribute('aria-hidden','true');
+            document.body.style.overflow = '';
+        }, 420);
+    }
+
+    function prevTerm(e) { if (e) e.stopPropagation(); if (currentFullIdx < 0) return; const idx = (currentFullIdx - 1 + solarTerms.length) % solarTerms.length; showFullTerm(solarTerms[idx], idx); }
+    function nextTerm(e) { if (e) e.stopPropagation(); if (currentFullIdx < 0) return; const idx = (currentFullIdx + 1) % solarTerms.length; showFullTerm(solarTerms[idx], idx); }
+
+    // 键盘导航：Esc 关闭，←/→ 切换
+    window.addEventListener('keydown', (e) => {
+        const view = document.getElementById('termFullView');
+        if (!view || view.style.display !== 'flex') return;
+        if (e.key === 'Escape') closeFullTerm();
+        else if (e.key === 'ArrowLeft') prevTerm();
+        else if (e.key === 'ArrowRight') nextTerm();
+    });
     function closeModalFunc() {
         const modal = document.getElementById('detailModal');
         modal.style.display = 'none';
