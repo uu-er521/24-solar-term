@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -172,7 +172,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
         }
-        .season-card {
+                                        .season-card {
             position: relative;
             border-radius: 32px;
             overflow: hidden;
@@ -778,11 +778,11 @@
             0%,100%{ transform: translateX(-50%) translateY(0);}
             50%{ transform: translateX(-50%) translateY(12px);}
         }
-        @media (max-width: 780px) {
+                @media (max-width: 780px) {
             .hero-content h1 { font-size: 2.8rem; letter-spacing: 6px; }
             .container { padding: 0 1rem; }
             .grid { gap: 1.2rem; }
-            .season-row { grid-template-columns: 1fr; }
+                        .season-row { grid-template-columns: 1fr; }
             .season-card { min-height: 200px; }
         }
     </style>
@@ -833,14 +833,14 @@
 
     <div class="season-gallery">
         <div class="season-row">
-            <div class="season-card slide-section">
+                                    <div class="season-card slide-section">
                 <img src="./image/1.立春.png" alt="立春">
                 <div class="season-info">
                     <h3>立春</h3>
                     <p>东风破冰，蛰虫初醒，立春宣告寒冬退场、万物复苏。</p>
                 </div>
             </div>
-            <div class="season-card slide-section delay">
+                                    <div class="season-card slide-section delay">
                 <img src="./image/7.立夏.png" alt="立夏">
                 <div class="season-info">
                     <h3>立夏</h3>
@@ -849,14 +849,14 @@
             </div>
         </div>
         <div class="season-row">
-            <div class="season-card slide-section delay2">
+                                    <div class="season-card slide-section delay2">
                 <img src="./image/13.立秋.png" alt="立秋">
                 <div class="season-info">
                     <h3>立秋</h3>
                     <p>秋意初至，暑气未消，贴秋膘、晒秋迎来丰收序章。</p>
                 </div>
             </div>
-            <div class="season-card slide-section delay3">
+                                    <div class="season-card slide-section delay3">
                 <img src="./image/19.立冬.png" alt="立冬">
                 <div class="season-info">
                     <h3>立冬</h3>
@@ -1023,7 +1023,7 @@
     let currentFullIdx = -1;
     function updateFullContent(term, idx) {
         const view = document.getElementById('termFullView');
-        const bgPath = `./image/${idx + 1}.${term.name}.png`;
+        const bgPath = `./backgrounds/${idx + 1}.${term.name}bg.jpg`;
         view.style.backgroundImage = `url('${bgPath}')`;
         document.getElementById('termFullIndex').innerText = idx + 1;
         document.getElementById('termFullName').innerText = term.name;
@@ -1146,11 +1146,10 @@
     // 添加背景视差额外效果: 滚动时hero变换透明度（高级感）
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
-        const hero = document.querySelector('.hero-parallax');
+                const hero = document.querySelector('.hero-parallax');
         if(hero) {
-            hero.style.opacity = 1 - scrolled / 800;
-            if(scrolled > 600) hero.style.opacity = 0;
-            else hero.style.opacity = 1;
+            const opacity = Math.max(0, 1 - scrolled / 800);
+            hero.style.opacity = opacity;
         }
     });
 </script>
