@@ -1,0 +1,1157 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>岁时记·二十四节气 | 非遗文化沉浸式体验</title>
+    <!-- 本地化资源：不使用外部 CDN 链接 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fbf7ef;
+            font-family: 'Inter', 'Noto Serif SC', system-ui, sans-serif;
+            color: #2c2418;
+            overflow-x: hidden;
+        }
+
+        /* 平滑滚动 & 视差预备 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 自定义滚动条保持质感 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #ede3d3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c2a071;
+            border-radius: 12px;
+        }
+
+        /* 全屏 Hero 视差区 */
+        .hero-parallax {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            /* 使用本地图片：将图片放在与 HTML 同目录，写 url('./background.jpg');
+               或放在 images 子文件夹时写 url('./images/bg.jpg'); */
+            background: url('./image/背景图雨水.jpg') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            isolation: isolate;
+        }
+        .hero-parallax::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(30, 20, 10, 0.55), rgba(50, 35, 20, 0.65));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 1.5rem;
+            backdrop-filter: blur(3px);
+            animation: fadeInUp 1.2s ease-out;
+        }
+        .slide-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .slide-section.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide-left {
+            transform: translateX(-40px);
+        }
+        .slide-right {
+            transform: translateX(40px);
+        }
+        .slide-left.reveal,
+        .slide-right.reveal {
+            transform: translateX(0);
+        }
+        .hero-content h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            font-family: 'Noto Serif SC', serif;
+            letter-spacing: 12px;
+            text-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            margin-bottom: 0.5rem;
+        }
+        .hero-content .sub {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            border-top: 1px solid rgba(255,245,215,0.7);
+            display: inline-block;
+            padding-top: 0.8rem;
+            font-weight: 300;
+        }
+        .hero-content p {
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: rgba(255,245,215,0.9);
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        /* 主要容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* 节气引言区 */
+        .intro-section {
+            text-align: center;
+            padding: 5rem 1rem 4rem;
+            background: #fffcf5;
+            margin-top: -2px;
+            position: relative;
+            z-index: 5;
+        }
+        .intro-section h2 {
+            font-size: 2.6rem;
+            font-family: 'Noto Serif SC', serif;
+            color: #5b3c1a;
+            position: relative;
+            display: inline-block;
+        }
+        .intro-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: #ddba8b;
+        }
+        .intro-text {
+            max-width: 800px;
+            margin: 2rem auto 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #5f4a30;
+        }
+
+        .season-gallery {
+            margin: 2rem 0 3rem;
+            display: grid;
+            gap: 1rem;
+        }
+        .season-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+                                        .season-card {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            min-height: 260px;
+            box-shadow: 0 26px 40px -24px rgba(0,0,0,0.16);
+            border: 1px solid rgba(255,255,255,0.7);
+            background: #fff;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+        .season-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .season-card.delay {
+            transition-delay: 0.3s;
+        }
+        .season-card.delay2 {
+            transition-delay: 0.6s;
+        }
+        .season-card.delay3 {
+            transition-delay: 0.9s;
+        }
+        .season-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .season-info {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1.2rem 1.3rem;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.72) 100%);
+            color: #fff;
+        }
+        .season-info h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.4rem;
+            font-family: 'Noto Serif SC', serif;
+        }
+        .season-info p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.94);
+        }
+
+        /* 节气卡片网格 + 微视差滚动触发效果 */
+        /* 全屏节气展示 */
+        #termFullView {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1200;
+            background: #000 center/cover no-repeat fixed;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 420ms ease;
+        }
+        #termFullView.active { opacity: 1; }
+        #termFullView .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(6,6,6,0.45);
+            backdrop-filter: blur(4px);
+        }
+        #termFullView .term-card {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            width: calc(100% - 4rem);
+            margin: 2rem;
+            background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.18));
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+        #termFullView .term-card h2 { margin: 0 0 0.6rem; font-family: 'Noto Serif SC', serif; font-size: 2.6rem; }
+        #termFullView .term-card p { color: rgba(255,255,255,0.95); line-height:1.8; }
+        #termFullView .term-card .term-content { font-size: 1.05rem; max-height: 42vh; overflow: auto; }
+        #termFullView .term-card .term-poem { margin-top:1rem; color:#f6e8d1; font-style:italic; font-size:0.98rem; }
+        #termFullView .close-full {
+            position: absolute;
+            top: 26px;
+            right: 28px;
+            z-index: 1300;
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 0.6rem 0.9rem;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        #termFullView .term-full-nav {
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(90%, 1100px);
+            z-index: 1300;
+            background: rgba(0,0,0,0.34);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        #termFullView .term-full-nav:hover .thumbs-wrap {
+            max-height: 340px;
+            opacity: 1;
+        }
+        #termFullView .nav-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 1rem;
+            color: #f9f2de;
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+        }
+        #termFullView .nav-head span {
+            color: #ffdca4;
+            font-weight: 600;
+        }
+        #termFullView .thumbs-wrap {
+            max-height: 0;
+            overflow-y: auto;
+            transition: max-height 280ms ease, opacity 220ms ease;
+            opacity: 0;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            background: rgba(0,0,0,0.45);
+        }
+        #termFullView .nav-thumb-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.65rem;
+            padding: 0.75rem 1rem 0.95rem;
+        }
+        #termFullView .nav-thumb {
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.08);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+            cursor: pointer;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+            display: grid;
+            grid-template-rows: 110px auto;
+        }
+        #termFullView .nav-thumb:hover,
+        #termFullView .nav-thumb.active {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 30px rgba(0,0,0,0.22);
+        }
+        #termFullView .nav-thumb .thumb-image {
+            background-size: cover;
+            background-position: center;
+            min-height: 110px;
+        }
+        #termFullView .nav-thumb .thumb-label {
+            padding: 0.8rem 0.85rem;
+            color: #fff;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            background: rgba(0,0,0,0.4);
+        }
+        #termFullView .nav-thumb .thumb-label strong {
+            display: block;
+            color: #ffe5b0;
+            font-size: 0.92rem;
+            margin-bottom: 0.25rem;
+        }
+        #termFullView .nav-thumb .thumb-label small {
+            display: block;
+            color: rgba(255,255,255,0.72);
+            font-size: 0.78rem;
+        }
+        /* 左右点击区域切换 */
+        #termFullView .nav-left, #termFullView .nav-right {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 28%;
+            z-index: 1250;
+            cursor: pointer;
+        }
+        #termFullView .nav-left { left: 0; }
+        #termFullView .nav-right { right: 0; }
+        /* 小提示箭头（可保留或隐藏） */
+        #termFullView .nav-left:after, #termFullView .nav-right:after {
+            content: '';
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            width: 48px; height: 48px; opacity: 0.18;
+            background-size: contain; background-repeat: no-repeat;
+        }
+        #termFullView .nav-left:after { left: 24px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><polyline points="32,12 16,24 32,36" stroke="%23fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+        #termFullView .nav-right:after { right: 24px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><polyline points="16,12 32,24 16,36" stroke="%23fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0 4rem;
+        }
+        .card {
+            background: rgba(255, 250, 240, 0.9);
+            border-radius: 48px;
+            padding: 1.8rem 1.5rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            border: 1px solid #f0e2d2;
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.7s ease, transform 0.6s ease, box-shadow 0.3s;
+        }
+        .card-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 32px;
+            margin-bottom: 1rem;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            background: #ffffff;
+            box-shadow: 0 30px 40px -18px rgba(80, 50, 20, 0.25);
+            border-color: #e2cfb5;
+        }
+        .season-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Noto Serif SC', serif;
+            margin: 0.3rem 0 0.4rem;
+            letter-spacing: 2px;
+        }
+        .card-date {
+            font-size: 0.85rem;
+            color: #b2763e;
+            margin-bottom: 1rem;
+            border-left: 3px solid #e3be91;
+            padding-left: 0.6rem;
+        }
+        .card-desc {
+            font-size: 0.9rem;
+            line-height: 1.45;
+            color: #53412e;
+        }
+        .custom-tag {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: #9a7248;
+            font-weight: 500;
+        }
+
+        /* 非遗专题滚动区 — 类似官方展示模块 */
+        .heritage-section {
+            background: #f2ecdf;
+            border-radius: 64px;
+            padding: 3rem 2rem;
+            margin: 2rem 0 4rem;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 20px 30px -10px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            font-family: 'Noto Serif SC', serif;
+            margin-bottom: 2rem;
+        }
+        .section-title i {
+            color: #c1945b;
+            margin-right: 10px;
+        }
+        .heritage-bar {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin-top: 1.5rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            min-height: 420px;
+            padding-bottom: 0.35rem;
+            transition: transform 260ms ease;
+            scroll-behavior: smooth;
+            perspective: 1800px;
+            background: linear-gradient(90deg, rgba(254,245,232,0.96), rgba(248,236,209,0.98));
+            border-radius: 40px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.65), 0 28px 60px rgba(0,0,0,0.12);
+        }
+        .heritage-bar::-webkit-scrollbar { height: 10px; }
+        .heritage-bar::-webkit-scrollbar-thumb { background: rgba(148, 110, 54, 0.35); border-radius: 999px; }
+        .heritage-section:hover .heritage-bar {
+            transform: scale(1.01);
+        }
+        .heritage-bar:hover .heritage-block:not(:hover) {
+            flex: 0.35 1 0;
+            opacity: 0.72;
+            transform: translateY(8px) rotateX(3deg) scale(0.96);
+        }
+        .heritage-bar:hover .heritage-block:nth-child(odd):not(:hover) {
+            transform: translateY(10px) rotateX(3deg) rotateY(4deg) scale(0.96);
+        }
+        .heritage-bar:hover .heritage-block:nth-child(even):not(:hover) {
+            transform: translateY(10px) rotateX(3deg) rotateY(-4deg) scale(0.96);
+        }
+        .heritage-block {
+            position: relative;
+            flex: 1 1 calc((100% - 0rem) / 11);
+            min-width: 6rem;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0;
+            overflow: hidden;
+            background: transparent;
+            transform-style: preserve-3d;
+            transition: flex 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 420ms ease;
+            transform-origin: center center;
+            cursor: pointer;
+        }
+        .heritage-block:first-child {
+            border-top-left-radius: 40px;
+            border-bottom-left-radius: 40px;
+        }
+        .heritage-block:last-child {
+            border-top-right-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+        .heritage-block:hover,
+        .heritage-block:focus-within {
+            flex: 6 1 0;
+            transform: translateY(-28px) rotateX(10deg) rotateY(2deg) scale(1.08);
+            box-shadow: 0 50px 140px rgba(0,0,0,0.34);
+            opacity: 1;
+            z-index: 3;
+        }
+        .heritage-block:hover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15), 0 18px 40px rgba(0,0,0,0.18);
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 260ms ease;
+        }
+        .heritage-block::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.045);
+            pointer-events: none;
+        }
+        .heritage-block .block-image {
+            min-height: 260px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 260ms ease;
+        }
+        .heritage-block:hover .block-image {
+            transform: scale(1.08) translateY(-6px);
+        }
+        .heritage-block .block-caption {
+            padding: 1.4rem 1.2rem 1.2rem;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.6rem;
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(248,241,228,0.92));
+            border-top: 1px solid rgba(255,255,255,0.45);
+        }
+        .heritage-block h4 {
+            margin: 0;
+            font-size: 1.18rem;
+            color: #3f2b1a;
+            line-height: 1.2;
+        }
+        .heritage-block p {
+            margin: 0;
+            color: #6b5134;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            max-height: 5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .heritage-block .block-extra {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1rem 1rem 1.2rem;
+            background: rgba(16,16,16,0.75);
+            color: #fff;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 260ms ease, opacity 260ms ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .heritage-block:hover .block-extra,
+        .heritage-block:focus-within .block-extra {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .heritage-block .block-extra h5 {
+            margin: 0;
+            font-size: 1rem;
+            color: #ffe9b7;
+            letter-spacing: 0.04em;
+        }
+        .heritage-block .block-extra p {
+            margin: 0;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+        .heritage-block .detail-image {
+            min-height: 120px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 18px;
+            opacity: 0.95;
+        }
+        @media (max-width: 1300px) {
+            .heritage-bar {
+                flex-wrap: wrap;
+            }
+            .heritage-block {
+                min-width: calc(33.333% - 0.75rem);
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                flex: 1 1 calc(33.333% - 0.75rem);
+            }
+        }
+        @media (max-width: 900px) {
+            .heritage-block {
+                min-width: calc(50% - 0.75rem);
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                flex: 1 1 calc(50% - 0.75rem);
+            }
+        }
+        @media (max-width: 640px) {
+            .heritage-bar {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                min-height: auto;
+            }
+            .heritage-block {
+                min-width: 80vw;
+                flex: 0 0 80vw;
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                flex: 0 0 90vw;
+            }
+        }
+        @media (max-width: 720px) {
+            .heritage-bar {
+                flex-direction: column;
+            }
+            .heritage-block {
+                min-width: 100%;
+                flex: 1 1 auto;
+            }
+            .heritage-block:hover,
+            .heritage-block:focus-within {
+                transform: none;
+            }
+        }
+
+        /* 节气韵味花信风格 */
+        .flower-news {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: #fffaf0;
+            border-radius: 48px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+        .flower-item {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            padding: 1rem;
+        }
+        .flower-item span {
+            display: block;
+            font-size: 1.35rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 模态框高级 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(20, 12, 5, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-card {
+            background: #fffcf2;
+            max-width: 550px;
+            width: 90%;
+            border-radius: 64px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 30px 45px rgba(0,0,0,0.3);
+            animation: modalPop 0.35s;
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 28px;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            color: #a28057;
+            border-top: 1px solid #e3d3c0;
+            margin-top: 3rem;
+            position: relative;
+        }
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            margin: 0 auto 1.2rem;
+            padding: 0.85rem 1.4rem;
+            border-radius: 999px;
+            background: rgba(255, 248, 235, 0.96);
+            border: 1px solid rgba(162, 128, 87, 0.24);
+            color: #6b4d2c;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms ease, background 280ms ease;
+        }
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: rgba(255, 255, 245, 1);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.12);
+        }
+        .back-to-top span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #f9d48e 0%, #dba85e 45%, #8d5b2d 100%);
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes bounce {
+            0%,100%{ transform: translateX(-50%) translateY(0);}
+            50%{ transform: translateX(-50%) translateY(12px);}
+        }
+                @media (max-width: 780px) {
+            .hero-content h1 { font-size: 2.8rem; letter-spacing: 6px; }
+            .container { padding: 0 1rem; }
+            .grid { gap: 1.2rem; }
+                        .season-row { grid-template-columns: 1fr; }
+            .season-card { min-height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero-parallax">
+    <div class="hero-content">
+        <h1>二十四节气</h1>
+        <div class="sub">THE 24 SOLAR TERMS</div>
+        <p>天地有节，风雅中华。列入联合国教科文组织人类非物质文化遗产代表作名录，顺天应时，生生不息。</p>
+    </div>
+    <div class="scroll-indicator" id="scrollDownBtn">
+        ⬇
+    </div>
+</div>
+
+<!-- 全屏节气展示容器（点击卡片切换到此视图） -->
+<div id="termFullView" role="dialog" aria-hidden="true">
+    <div class="overlay" onclick="closeFullTerm()"></div>
+    <div class="nav-left" onclick="prevTerm(event)"></div>
+    <div class="nav-right" onclick="nextTerm(event)"></div>
+    <div class="term-full-nav">
+        <div class="nav-head">
+            <div>当前节气：<span id="termFullIndex">1</span>/24</div>
+        </div>
+        <div class="thumbs-wrap">
+            <div class="nav-thumb-list" id="termThumbList"></div>
+        </div>
+    </div>
+    <button class="close-full" onclick="closeFullTerm()" aria-label="关闭">✕</button>
+    <div class="term-card" id="termCard">
+        <h2 id="termFullName">节气</h2>
+        <p id="termFullDate" style="color:#f3e6c8; margin:0.2rem 0 1rem;"></p>
+        <div id="termFullContent" class="term-content"></div>
+        <div id="termFullPoem" class="term-poem"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="intro-section slide-section">
+        <h2>节气总说</h2>
+        <div class="intro-text">
+            斗转星移，寒暑交替，二十四节气以太阳轨迹为尺，以草木生灵为证，镌刻着华夏先民对天地的敬畏、对时序的感知。
+            它不只是农耕历法，更是刻在中国人骨血里的生活哲学，藏着春生夏长、秋收冬藏的智慧，裹着烟火人间的温情。
+        </div>
+    </div>
+
+    <div class="season-gallery">
+        <div class="season-row">
+                                    <div class="season-card slide-section">
+                <img src="./image/1.立春.png" alt="立春">
+                <div class="season-info">
+                    <h3>立春</h3>
+                    <p>东风破冰，蛰虫初醒，立春宣告寒冬退场、万物复苏。</p>
+                </div>
+            </div>
+                                    <div class="season-card slide-section delay">
+                <img src="./image/7.立夏.png" alt="立夏">
+                <div class="season-info">
+                    <h3>立夏</h3>
+                    <p>夏日伊始，万物繁茂，民间迎夏、尝新、称人，祈求康健无病。</p>
+                </div>
+            </div>
+        </div>
+        <div class="season-row">
+                                    <div class="season-card slide-section delay2">
+                <img src="./image/13.立秋.png" alt="立秋">
+                <div class="season-info">
+                    <h3>立秋</h3>
+                    <p>秋意初至，暑气未消，贴秋膘、晒秋迎来丰收序章。</p>
+                </div>
+            </div>
+                                    <div class="season-card slide-section delay3">
+                <img src="./image/19.立冬.png" alt="立冬">
+                <div class="season-info">
+                    <h3>立冬</h3>
+                    <p>冬季伊始，万物收藏，拜冬进补，寒风中的烟火愈发温暖。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 节气网格卡片 (动态js生成) -->
+    <div class="grid" id="solarGrid"></div>
+
+    <!-- 非遗扩展模块 横向弹性竖块 -->
+    <div class="heritage-section slide-section">
+        <div class="section-title">☂️ 节气非遗名录 · 活态传承</div>
+        <div class="heritage-bar" id="heritageBar" role="list"></div>
+    </div>
+
+    <!-- 花信风及物候文化展示 -->
+    <div class="flower-news slide-section" id="flowerNews">
+        <div class="flower-item" style="color:#b3772e;"><span>🍃</span><h4>立春三候</h4><p>一候迎春<br>二候樱桃<br>三候望春</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🪶</span><h4>雨水三候</h4><p>一候菜花<br>二候杏花<br>三候李花</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌳</span><h4>惊蛰三候</h4><p>一候桃花<br>二候棣棠<br>三候蔷薇</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌤</span><h4>春分三候</h4><p>一候海棠<br>二候梨花<br>三候木兰</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌱</span><h4>立夏三候</h4><p>一候蝼蝈鸣<br>二候蚯蚓出<br>三候戴胜降</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>💨</span><h4>芒种三候</h4><p>一候螳螂生<br>二候反舌无声<br>三候蜩始鸣</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>☀️</span><h4>夏至三候</h4><p>一候鹿角解<br>二候半夏生<br>三候莓始华</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>☂️</span><h4>立秋三候</h4><p>一候凉风至<br>二候白露降<br>三候寒蝉响</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🍎</span><h4>处暑三候</h4><p>一候鹰乃祭鸟<br>二候天地始肃<br>三候禾乃报歉</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🍃</span><h4>秋分三候</h4><p>一候玄鸟归<br>二候雷始收<br>三候蛰虫坯</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>❄️</span><h4>立冬三候</h4><p>一候水始冰<br>二候地始冻<br>三候雉入大水为蜃</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌙</span><h4>大寒三候</h4><p>一候鹖鵲不鸣<br>二候虎始交<br>三候荔挺生</p></div>
+    </div>
+</div>
+
+<footer>
+    <button class="back-to-top" id="backToTopBtn" aria-label="返回顶部">
+        <span>⟳</span>
+        返回立春
+    </button>
+    <div>⛅ 立春为首，回到节气初始，重新拥抱春的节拍</div>
+    <div style="margin-top:0.8rem; font-size:0.92rem; color:#8f7050;">非遗传承 · 二十四节气智慧 · 风物一页一节</div>
+    <div style="margin-top:0.6rem;">中国非物质文化遗产网灵感设计 | 沉浸式滚动体验</div>
+    <div style="margin-top:0.6rem; font-size:0.92rem; color:#8f7050;">第一队</div>
+</footer>
+
+<!-- 模态框 -->
+<div id="detailModal" class="modal">
+    <div class="modal-card">
+        <span class="close-modal">&times;</span>
+        <h2 id="modalName">节气</h2>
+        <p id="modalDate" style="color:#b57a3b; margin: 0.3rem 0 0.8rem;"></p>
+        <p id="modalDesc" style="line-height:1.6; margin-bottom:1rem;"></p>
+        <div style="background:#f4ecdf; border-radius: 32px; padding: 0.8rem;"><strong>📖 岁时习俗</strong> <span id="modalCustom"></span></div>
+    </div>
+</div>
+
+<script>
+    // 节气完整数据（融合官方文化信息）
+    const solarTerms = [
+        { name:"立春", date:"2月3日-5日", season:"spring", shortDesc:"东风解冻，蛰虫始振，鱼陟负冰。", custom:"迎春、鞭春牛、咬春", longDesc:"二十四节气之首，万物起始。民间有打春牛、食春饼习俗，象征农耕启动。", content:"东风破冰，蛰虫初醒，立春是二十四节气的开篇，宣告寒冬退场、万物复苏。民间迎春、鞭春牛，祈愿风调雨顺；食春饼、咬春菜，以鲜嫩滋味拥抱新生。这一天，天地间的生机悄然涌动，人间烟火与自然节律同频。", poem:"律回岁晚冰霜少，春到人间草木知。便觉眼前生意满，东风吹水绿参差。—— 张栻《立春偶成》" },
+        { name:"雨水", date:"2月18日-20日", season:"spring", shortDesc:"獭祭鱼，鸿雁来，草木萌动。", custom:"回娘屋、占稻色", longDesc:"气温回升，降水增多，川西一带出嫁女回娘家探望。", content:"气温回升，降水渐增，春雨润物，大地回暖。民间有回娘家、拉保保的习俗，祈佑孩童安康；湿冷渐消，草木抽芽，人间烟火在淅沥春雨中愈发温柔。此时的雨，是天地写给大地的情诗，温柔且有力量。", poem:"小楼一夜听春雨，深巷明朝卖杏花。矮纸斜行闲作草，晴窗细乳戏分茶。—— 陆游《临安春雨初霁》" },
+        { name:"惊蛰", date:"3月5日-6日", season:"spring", shortDesc:"桃始华，仓庚鸣，鹰化为鸠。", custom:"吃梨、祭白虎", longDesc:"春雷乍响，蛰虫惊醒。吃梨寓意远离病害。", content:"春雷乍响，蛰伏生灵破土而出，万物从沉睡中苏醒。古时祭白虎、打小人、熏艾草，驱邪避灾；民间食梨，寓意远离病虫、顺遂安康。一声惊雷，震醒天地，也唤醒了繁忙的春耕。", poem:"微雨众卉新，一雷惊蛰始。田家几日闲，耕种从此起。—— 韦应物《观田家》" },
+        { name:"春分", date:"3月20日-21日", season:"spring", shortDesc:"玄鸟至，雷乃发声，始电。", custom:"竖蛋、吃春菜", longDesc:"昼夜均分，民间立蛋游戏，祈求平衡安康。", content:"昼夜均分，寒暑平衡，春色平分人间。民间竖蛋、放风筝、踏青赏春，祭祀祖先；百花盛放，燕语莺啼，天地间一派明媚祥和。这一天，阴阳相半，万物均衡，藏着中式哲学的中庸之美。", poem:"胜日寻芳泗水滨，无边光景一时新。等闲识得东风面，万紫千红总是春。—— 朱熹《春日》" },
+        { name:"清明", date:"4月4日-6日", season:"spring", shortDesc:"桐始华，田鼠化鴽，虹始见。", custom:"扫墓、踏青、插柳", longDesc:"既是节气又是节日，追思与迎春相融。", content:"气清景明，万物皆显，兼具自然与人文双重内涵。扫墓祭祖、缅怀先人，是血脉的传承；踏青、插柳、放风筝，是对生机的拥抱。食青团、艾饺，以清润滋味，寄思念与希望。", poem:"清明时节雨纷纷，路上行人欲断魂。借问酒家何处有？牧童遥指杏花村。—— 杜牧《清明》" },
+        { name:"谷雨", date:"4月19日-21日", season:"spring", shortDesc:"萍始生，鸣鸠拂羽，戴胜降桑。", custom:"喝谷雨茶、食香椿", longDesc:"雨生百谷，南方采谷雨茶，清火明目。", content:"雨生百谷，农事繁忙，是春季最后一个节气。此时播种移苗、埯瓜点豆，民间赏牡丹、喝谷雨茶，清热除湿。春雨滋养土地，也滋养着人间的丰收期盼，春的生机在此刻抵达顶峰。", poem:"谷雨如丝复似尘，煮瓶浮蜡正尝新。牡丹破萼樱桃熟，未许飞花减却春。—— 范成大《晚春田园杂兴》" },
+        { name:"立夏", date:"5月5日-6日", season:"summer", shortDesc:"蝼蝈鸣，蚯蚓出，王瓜生。", custom:"称人、吃蛋", longDesc:"夏季开始，尝新活动，秤人祈福。", content:"夏日伊始，万物繁茂，气温攀升，绿荫渐浓。民间迎夏、尝新、称人，祈求康健无病；食青梅、品新茶，以清爽滋味迎接盛夏。告别春的温柔，迎来夏的热烈，天地万物肆意生长。", poem:"晴日暖风生麦气，绿阴幽草胜花时。石榴开遍透帘明，树阴满地日当午。—— 王安石《初夏即事》" },
+        { name:"小满", date:"5月20日-22日", season:"summer", shortDesc:"苦菜秀，靡草死，麦秋至。", custom:"祭车神、吃苦菜", longDesc:"麦类灌浆，小得盈满，宜食苦菜。", content:"夏熟作物籽粒渐满，却未成熟，得名“小满”。民间祭车神、祈丰收，寓意知足常乐；麦田泛黄，蚕事繁忙，天地间藏着“满而不盈”的东方智慧。小得盈满，是人生最好的状态。", poem:"夜莺啼绿柳，皓月醒长空。最爱垄头麦，迎风笑落红。—— 欧阳修《五绝・小满》" },
+        { name:"芒种", date:"6月5日-7日", season:"summer", shortDesc:"螳螂生，鹏始鸣，反舌无声。", custom:"煮青梅、安苗", longDesc:"忙于夏收夏种，皖南有安苗祭祀。", content:"有芒之谷可种，夏收夏种至忙，是一年中最繁忙的节气。民间送花神、煮青梅，告别春景，迎接盛夏；麦浪金黄，稻禾青青，汗水浇灌着丰收的希望。", poem:"梅子金黄杏子肥，麦花雪白菜花稀。日长篱落无人过，惟有蜻蜓蛱蝶飞。—— 范成大《四时田园杂兴・其二》" },
+        { name:"夏至", date:"6月21日-22日", season:"summer", shortDesc:"鹿角解，蝉始鸣，半夏生。", custom:"吃夏至面、祭地", longDesc:"白昼最长，北方吃面尝新麦。", content:"白昼最长，黑夜最短，阳气至极，阴气始生。民间祭神祭祖、吃夏至面，寓意“尝新祈福”；蝉鸣阵阵，荷风送香，盛夏的热烈在此刻尽情绽放。", poem:"积雨空林烟火迟，蒸藜炊黍饷东菑。漠漠水田飞白鹭，阴阴夏木啭黄鹂。—— 王维《积雨辋川庄作》" },
+        { name:"小暑", date:"7月6日-8日", season:"summer", shortDesc:"温风至，蟋蟀居宇，鹰始鸷。", custom:"食新、吃藕", longDesc:"入初伏，尝新米，清补养生。", content:"暑气初盛，热浪渐起，盛夏正式登场。民间食新、尝荔枝，祈愿平安；伏天将至，万物在酷暑中积蓄力量，蝉鸣、荷香、晚风，构成夏日最动人的画卷。", poem:"毕竟西湖六月中，风光不与四时同。接天莲叶无穷碧，映日荷花别样红。—— 杨万里《晓出净慈寺送林子方》" },
+        { name:"大暑", date:"7月22日-24日", season:"summer", shortDesc:"腐草为萤，土润溽暑，大雨时行。", custom:"喝暑羊、烧伏香", longDesc:"最热时节，鲁南喝羊汤，广东吃仙草。", content:"一年中最热时节，酷热难耐，万物生长至盛。民间饮伏茶、晒伏姜、赏荷避暑，以清凉对抗酷暑；暴雨频至，万物蓬勃，生命在极致炎热中绽放活力。", poem:"仲夏苦夜短，开轩纳微凉。虚明见纤毫，羽虫亦飞扬。—— 杜甫《夏夜叹》" },
+        { name:"立秋", date:"8月7日-9日", season:"autumn", shortDesc:"凉风至，白露降，寒蝉鸣。", custom:"贴秋膘、晒秋", longDesc:"秋来暑去，补回夏季损耗。", content:"秋意初至，暑气未消，“立秋”是秋季的开篇。民间啃秋、贴秋膘、晒秋，以烟火气迎接丰收；梧桐叶落，凉风渐起，天地从热烈转向沉静，收获的序章由此开启。", poem:"银烛秋光冷画屏，轻罗小扇扑流萤。天阶夜色凉如水，卧看牵牛织女星。—— 杜牧《秋夕》" },
+        { name:"处暑", date:"8月22日-24日", season:"autumn", shortDesc:"鹰乃祭鸟，天地始肃，禾乃登。", custom:"开渔节、吃鸭子", longDesc:"出暑，沿海开渔，鸭肉润燥。", content:"暑气至此而止，秋凉正式登场。民间祭祖、迎秋、放河灯，开渔节启航，告别盛夏，拥抱清秋。天地褪去燥热，回归清爽，人间多了几分闲适。", poem:"尘世难逢开口笑，菊花须插满头归。但将酩酊酬佳节，不用登临恨落晖。—— 杜牧《九日齐山登高》" },
+        { name:"白露", date:"9月7日-8日", season:"autumn", shortDesc:"鸿雁来，玄鸟归，群鸟养羞。", custom:"饮白露茶、收清露", longDesc:"夜凉露凝，白露茶甘醇。", content:"水汽凝露，洁白如玉，秋意渐浓。民间收清露、饮白露茶、吃番薯，润燥养生；草木染霜，鸿雁南飞，天地间多了几分清冷诗意。", poem:"戍鼓断人行，边秋一雁声。露从今夜白，月是故乡明。—— 杜甫《月夜忆舍弟》" },
+        { name:"秋分", date:"9月22日-24日", season:"autumn", shortDesc:"雷始收声，蛰虫坯户，水始涸。", custom:"祭月、吃秋菜", longDesc:"昼夜平分，岭南吃秋菜。", content:"昼夜均分，秋色平分，是秋季的中点。民间祭月、送秋牛、粘雀子嘴，祈愿丰收；丹桂飘香，蟹肥菊黄，天地间满是丰收的喜悦与平和。", poem:"自古逢秋悲寂寥，我言秋日胜春朝。晴空一鹤排云上，便引诗情到碧霄。—— 刘禹锡《秋词・其一》" },
+        { name:"寒露", date:"10月8日-9日", season:"autumn", shortDesc:"鸿雁来宾，雀入大水为蛤，菊有黄华。", custom:"登高、饮菊花酒", longDesc:"露水寒冷，秋钓边。", content:"露气寒冷，将凝结为霜，秋意深浓。民间登高、赏枫、饮秋茶，强身健体；草木枯黄，雁阵南迁，天地间尽显萧瑟之美，也藏着对冬日的期盼。", poem:"风急天高猿啸哀，渚清沙白鸟飞回。无边落木萧萧下，不尽长江滚滚来。—— 杜甫《登高》" },
+        { name:"霜降", date:"10月23日-24日", season:"autumn", shortDesc:"豺乃祭兽，草木黄落，蛰虫咸俯。", custom:"吃柿子、赏菊", longDesc:"霜打红叶，红柿御寒。", content:"秋季最后一个节气，霜华满地，万物收敛。民间赏菊、吃柿子、进补养生，抵御寒气；草木凋零，蛰虫休眠，天地为冬日的蛰伏做好准备。", poem:"远上寒山石径斜，白云生处有人家。停车坐爱枫林晚，霜叶红于二月花。—— 杜牧《山行》" },
+        { name:"立冬", date:"11月7日-8日", season:"winter", shortDesc:"水始冰，地始冻，雉入大水为蜃。", custom:"吃饺子、贺冬", longDesc:"补冬，北方饺子交子之时。", content:"冬季伊始，万物收藏，寒气渐生。民间拜冬、酿黄酒、进补食俗，积蓄能量；大地褪去繁华，回归沉静，人间烟火在寒风中愈发温暖。", poem:"冻笔新诗懒写，寒炉美酒时温。醉看墨花月白，恍疑雪满前村。—— 李白《立冬》" },
+        { name:"小雪", date:"11月22日-23日", season:"winter", shortDesc:"虹藏不见，天气上升，闭塞成冬。", custom:"腌腊肉、吃糍粑", longDesc:"气温下降，腌菜备冬。", content:"气温骤降，初雪飘落，雪量尚小。民间腌腊肉、晒干货，为冬日储备滋味；天地素白，万物静谧，冬日的诗意悄然绽放。", poem:"绿蚁新醅酒，红泥小火炉。晚来天欲雪，能饮一杯无？—— 白居易《问刘十九》" },
+        { name:"大雪", date:"12月6日-8日", season:"winter", shortDesc:"鹖鴠不鸣，虎始交，荔挺出。", custom:"观封河、腌肉", longDesc:"大雪节气，腌肉迎年。", content:"雪盛地寒，万物冰封，天地一片苍茫。民间赏雪、滑冰、进补羊肉，抵御严寒；银装素裹，山河静谧，冬日的壮阔在此刻尽显。", poem:"千山鸟飞绝，万径人踪灭。孤舟蓑笠翁，独钓寒江雪。—— 柳宗元《江雪》" },
+        { name:"冬至", date:"12月21日-23日", season:"winter", shortDesc:"蚯蚓结，麋角解，水泉动。", custom:"饺子汤圆、画九", longDesc:"数九寒天，阴极阳生。", content:"白昼最短，黑夜最长，阴极之至，阳气始生。民间祭天祭祖、吃饺子汤圆，数九寒天自此开始；这一天，人间团圆，烟火温暖，藏着对春天的期盼。", poem:"邯郸驿里逢冬至，抱膝灯前影伴身。想得家中夜深坐，还应说着远行人。—— 白居易《邯郸冬至夜思家》" },
+        { name:"小寒", date:"1月5日-7日", season:"winter", shortDesc:"雁北乡，鹊始巢，雉始鸲。", custom:"探梅、吃腊八粥", longDesc:"寒气逼人，踏雪寻梅。", content:"寒气渐盛，未达极致，是冬日的纵深。民间赏梅、进补、熬煮腊八粥，暖身暖心；天地严寒，却有暗香浮动，生命在寒冬中坚守希望。", poem:"墙角数枝梅，凌寒独自开。遥知不是雪，为有暗香来。—— 王安石《梅花》" },
+        { name:"大寒", date:"1月20日-21日", season:"winter", shortDesc:"鸡乳，征鸟厉疾，水泽腹坚。", custom:"尾牙祭、除尘", longDesc:"岁末大寒，迎新春。", content:"一年中最后一个节气，寒气至极，岁末将至。民间扫尘、备年货、迎新年，辞旧迎新；严寒过后，便是立春，四季轮回至此圆满，新的希望悄然孕育。", poem:"岁暮风动地，夜寒雪连天。老夫何处宿，暖帐温炉前。—— 白居易《村居卧病三首・其三》" }
+    ];
+
+    // 非遗名录数据 (来源于官网)
+    const heritageItems = [
+        { name:"九华立春祭", desc:"春风灯火，祈福九华。", detail:"嘉礼鼓声起，村落在迎春的火焰与香烟中，祈愿河山岁丰。" },
+        { name:"班春劝农", desc:"春令鼓声，劝耕千里。", detail:"古老的乡间集市，将春天的愿望化作铿锵的农耕鼓点。" },
+        { name:"石阡说春", desc:"侗乡说春，天地归暖。", detail:"说春的言辞与歌舞，将自然的节律细数成春的仪式。" },
+        { name:"苗族赶秋", desc:"红裳赶秋，丰年蝴蝶。", detail:"赶秋的旌旗与花鼓，让丰收的期盼在秋日里盛开。" },
+        { name:"安仁赶分社", desc:"春分旗队，礼赞田禾。", detail:"祭神巡游中，春耕的希望与乡愁并肩前行。" },
+        { name:"壮族霜降节", desc:"霜叶登高，歌声入云。", detail:"在凉风与霜露中，壮乡用歌舞迎接秋收的诗意。" },
+        { name:"三门祭冬", desc:"冬至祭礼，炉火映寒。", detail:"冬至之夜，祭祀与温酒让寒冬有了温暖的烛光。" },
+        { name:"半山立夏习俗", desc:"夏声初起，鼓声远扬。", detail:"立夏之际，人们用歌舞与礼俗拥抱夏日的苏醒。" },
+        { name:"送大暑船", desc:"大暑送瘟，锣鼓扬帆。", detail:"彩船起行，是沿海村落向酷暑与瘟疫宣战的仪式。" },
+        { name:"梅源芒种开犁节", desc:"芒种启耕，牛耕田畴。", detail:"开犁的牛蹄踏出希望，田野翻新出夏日的绿意。" },
+        { name:"内乡打春牛习俗", desc:"打春牛醒，春耕再启。", detail:"锣鼓震天，打春牛的声响唤醒沉睡的大地。" }
+    ];
+
+    // 渲染节气网格 + 滚动视差动画
+    const gridContainer = document.getElementById('solarGrid');
+    function renderCards() {
+        const termIcons = {
+            立春: '🌱', 雨水: '🌧', 惊蛰: '⚡', 春分: '🌿', 清明: '🌼', 谷雨: '🍃',
+            立夏: '🌻', 小满: '🌾', 芒种: '🌱', 夏至: '☀️', 小暑: '🔥', 大暑: '🌤',
+            立秋: '🍂', 处暑: '🍉', 白露: '🌫', 秋分: '🍁', 寒露: '❄️', 霜降: '☃️',
+            立冬: '❄️', 小雪: '🌨', 大雪: '⛄', 冬至: '🍲', 小寒: '🧊', 大寒: '⛄'
+        };
+        let html = '';
+        solarTerms.forEach((term, idx) => {
+            let seasonIcon = term.season === 'spring' ? '🌸' : (term.season === 'summer' ? '☀️' : (term.season === 'autumn' ? '🍁' : '❄️'));
+            const customIcon = termIcons[term.name] || '🤲';
+            html += `
+                <div class="card" data-idx="${idx}">
+                    <div class="card-image"><img src="./image/${idx + 1}.${term.name}.png" alt="${term.name}"></div>
+                    <div class="season-icon">${seasonIcon}</div>
+                    <h3>${term.name}</h3>
+                    <div class="card-date">${term.date}</div>
+                    <div class="card-desc">${term.shortDesc}</div>
+                    <div class="custom-tag">${customIcon} ${term.custom.split('、')[0]}</div>
+                </div>
+            `;
+        });
+        gridContainer.innerHTML = html;
+        // 卡片点击打开模态
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const idx = card.getAttribute('data-idx');
+                if (idx !== null) showFullTerm(solarTerms[parseInt(idx)], parseInt(idx));
+            });
+        });
+        renderFullNav();
+        // 滚动显示动画 Intersection Observer
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.classList.toggle('reveal', entry.isIntersecting);
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+        cards.forEach(card => observer.observe(card));
+
+        const slideSections = document.querySelectorAll('.slide-section');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.target.classList.toggle('reveal', entry.isIntersecting);
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -10px 0px' });
+        slideSections.forEach(section => sectionObserver.observe(section));
+    }
+
+    function showModal(term) {
+        const modal = document.getElementById('detailModal');
+        document.getElementById('modalName').innerText = term.name;
+        document.getElementById('modalDate').innerHTML = `📅 ${term.date}`;
+        document.getElementById('modalDesc').innerHTML = `<p>${term.content}</p><p>${term.longDesc}</p><p style="margin-top:1rem; color:#7a5b30; font-style:italic;">${term.poem}</p>`;
+        document.getElementById('modalCustom').innerHTML = term.custom + "。体现了顺应自然、尊重物候的传统智慧。";
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // 全屏展示节气（淡入淡出、左右切换、键盘导航）
+    let currentFullIdx = -1;
+    function updateFullContent(term, idx) {
+        const view = document.getElementById('termFullView');
+        const bgPath = `./backgrounds/${idx + 1}.${term.name}bg.jpg`;
+        view.style.backgroundImage = `url('${bgPath}')`;
+        document.getElementById('termFullIndex').innerText = idx + 1;
+        document.getElementById('termFullName').innerText = term.name;
+        document.getElementById('termFullDate').innerText = term.date;
+        document.getElementById('termFullContent').innerText = term.content || term.longDesc || term.shortDesc;
+        document.getElementById('termFullPoem').innerText = term.poem || '';
+        currentFullIdx = idx;
+        highlightThumb(idx);
+    }
+
+    function showFullTerm(term, idx) {
+        const view = document.getElementById('termFullView');
+        // 如果已打开则做淡出换图再淡入
+        if (view.style.display === 'flex' && view.classList.contains('active')) {
+            view.classList.remove('active');
+            setTimeout(() => {
+                updateFullContent(term, idx);
+                // 强制重绘后淡入
+                void view.offsetWidth;
+                view.classList.add('active');
+            }, 260);
+            return;
+        }
+        updateFullContent(term, idx);
+        view.style.display = 'flex';
+        view.setAttribute('aria-hidden','false');
+        // 触发过渡
+        requestAnimationFrame(() => view.classList.add('active'));
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeFullTerm() {
+        const view = document.getElementById('termFullView');
+        if (!view) return;
+        view.classList.remove('active');
+        setTimeout(() => {
+            view.style.display = 'none';
+            view.setAttribute('aria-hidden','true');
+            document.body.style.overflow = '';
+        }, 420);
+    }
+
+    function renderFullNav() {
+        const thumbList = document.getElementById('termThumbList');
+        if (!thumbList) return;
+        thumbList.innerHTML = solarTerms.map((term, idx) => `
+            <div class="nav-thumb" data-idx="${idx}" onclick="showFullTerm(solarTerms[${idx}], ${idx})">
+                <div class="thumb-image" style="background-image:url('./image/${idx + 1}.${term.name}.png')"></div>
+                <div class="thumb-label">
+                    <strong>${idx + 1}. ${term.name}</strong>
+                    <small>${term.date}</small>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function highlightThumb(idx) {
+        document.querySelectorAll('#termThumbList .nav-thumb').forEach((thumb) => {
+            thumb.classList.toggle('active', parseInt(thumb.getAttribute('data-idx')) === idx);
+        });
+    }
+
+    function prevTerm(e) { if (e) e.stopPropagation(); if (currentFullIdx < 0) return; const idx = (currentFullIdx - 1 + solarTerms.length) % solarTerms.length; showFullTerm(solarTerms[idx], idx); }
+    function nextTerm(e) { if (e) e.stopPropagation(); if (currentFullIdx < 0) return; const idx = (currentFullIdx + 1) % solarTerms.length; showFullTerm(solarTerms[idx], idx); }
+
+    // 键盘导航：Esc 关闭，←/→ 切换
+    window.addEventListener('keydown', (e) => {
+        const view = document.getElementById('termFullView');
+        if (!view || view.style.display !== 'flex') return;
+        if (e.key === 'Escape') closeFullTerm();
+        else if (e.key === 'ArrowLeft') prevTerm();
+        else if (e.key === 'ArrowRight') nextTerm();
+    });
+    function closeModalFunc() {
+        const modal = document.getElementById('detailModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    document.querySelector('.close-modal')?.addEventListener('click', closeModalFunc);
+    window.addEventListener('click', (e) => {
+        if (e.target === document.getElementById('detailModal')) closeModalFunc();
+    });
+
+    document.getElementById('backToTopBtn')?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 渲染横向可扩展的非遗竖块区域
+    function renderHeritageFan() {
+        const heritageBar = document.getElementById('heritageBar');
+        if (!heritageBar) return;
+        heritageBar.innerHTML = heritageItems.map((item, index) => {
+            const mainImage = `./custom-image/习俗${index + 1}.1.jpg`;
+            const hoverImage = `./custom-image/习俗${index + 1}.2.jpg`;
+            return `
+                <div class="heritage-block" tabindex="0" role="listitem">
+                    <div class="block-image" style="background-image:url('${mainImage}')"></div>
+                    <div class="block-caption">
+                        <h4>${item.name}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                    <div class="block-extra">
+                        <h5>${item.name}</h5>
+                        <div class="detail-image" style="background-image:url('${hoverImage}')"></div>
+                        <p>${item.detail}</p>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // 滚动引导
+    document.getElementById('scrollDownBtn')?.addEventListener('click', () => {
+        window.scrollTo({ top: window.innerHeight - 50, behavior: 'smooth' });
+    });
+
+    renderCards();
+    renderHeritageFan();
+    
+    // 添加背景视差额外效果: 滚动时hero变换透明度（高级感）
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+                const hero = document.querySelector('.hero-parallax');
+        if(hero) {
+            const opacity = Math.max(0, 1 - scrolled / 800);
+            hero.style.opacity = opacity;
+        }
+    });
+</script>
+</body>
+</html>
