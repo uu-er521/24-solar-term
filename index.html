@@ -1013,19 +1013,19 @@
                 }
 
         /* ===== 全屏屏保按钮 — 中国风水墨交互 ===== */
-        .fullscreen-btn {
+                .fullscreen-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            background: rgba(200, 180, 155, 0.18);
+            gap: 0.45rem;
+            background: rgba(200, 180, 155, 0.20);
             backdrop-filter: blur(8px);
-            padding: 0.3rem 0.9rem 0.3rem 0.7rem;
+            padding: 0.45rem 1.1rem 0.45rem 0.9rem;
             border-radius: 30px;
             color: #e8ddcd;
-            border: 1px solid rgba(232, 220, 200, 0.15);
+            border: 1px solid rgba(232, 220, 200, 0.18);
             cursor: pointer;
-            font-size: 0.82rem;
-            letter-spacing: 1px;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
             font-family: 'Noto Serif SC', '华文楷体', serif;
             transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             box-shadow: 0 0 0 rgba(200, 180, 150, 0);
@@ -1114,203 +1114,211 @@
             grid-template-rows: auto 1fr auto;
             gap: 1rem;
         }
-                /* 左上角 — 实时时钟 + 日期信息 */
-        .ss-left {
-            grid-column: 1;
-            grid-row: 1;
-            text-align: left;
-            align-self: start;
-            line-height: 1.6;
-        }
-        .ss-left .ss-clock-hm {
-            font-size: 4.2rem;
-            font-weight: 400;
-            letter-spacing: 8px;
-            color: #ffffff;
-            text-shadow: 0 2px 24px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.3);
-            font-family: 'Noto Serif SC', 'Courier New', monospace;
-            line-height: 1.2;
-        }
-        .ss-left .ss-clock-ss {
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            color: rgba(255,255,255,0.6);
-            text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-            margin-left: 0.2rem;
-            vertical-align: super;
-        }
-        .ss-left .ss-date-greg {
-            font-size: 1.8rem;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: #ffffff;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-            margin-top: 0.5rem;
-        }
-        .ss-left .ss-date-week {
-            font-size: 1.2rem;
-            color: #f5e8d0;
-            letter-spacing: 3px;
-            margin-top: 0.15rem;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.5);
-        }
-        .ss-left .ss-date-lunar {
-            font-size: 1.15rem;
-            color: #f0dcbe;
-            letter-spacing: 4px;
-            margin-top: 0.25rem;
-            border-left: 2px solid rgba(255,235,200,0.3);
-            padding-left: 0.8rem;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-        }
-        /* 中上方 — 天干地支（横排） */
-        .ss-center-top {
-            grid-column: 2;
-            grid-row: 1;
-            text-align: center;
-            align-self: start;
-            justify-self: center;
-            background: rgba(0,0,0,0.25);
-            backdrop-filter: blur(14px);
-            border-radius: 48px 16px 48px 16px;
-            padding: 1.2rem 2rem;
-            border: 1px solid rgba(255,235,200,0.12);
-            box-shadow: 0 0 80px rgba(0,0,0,0.2);
-            line-height: 1.8;
-        }
-        .ss-center-top .ss-ganzhi-row {
-            display: flex;
-            gap: 1.8rem;
-            justify-content: center;
-            align-items: flex-end;
-        }
-        .ss-center-top .ss-ganzhi-row .gz-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .ss-center-top .ss-ganzhi-row .gz-item .gz-char {
-            font-size: 3rem;
-            line-height: 1.2;
-            color: #ffffff;
-            text-shadow: 0 2px 24px rgba(0,0,0,0.6);
-            letter-spacing: 6px;
-        }
-        .ss-center-top .ss-ganzhi-row .gz-item .gz-label {
-            font-size: 0.7rem;
-            color: #d4c4a8;
-            letter-spacing: 3px;
-            margin-top: 0.1rem;
-            text-shadow: 0 1px 8px rgba(0,0,0,0.4);
-        }
-        /* 右上角 — 十二时辰 */
-        .ss-right {
-            grid-column: 3;
-            grid-row: 1;
-            text-align: right;
-            align-self: start;
-            line-height: 1.5;
-        }
-        .ss-right .ss-shichen-name {
-            font-size: 3.6rem;
-            font-weight: 500;
-            letter-spacing: 12px;
-            color: #ffffff;
-            text-shadow: 0 2px 24px rgba(0,0,0,0.6);
-        }
-        .ss-right .ss-shichen-period {
-            font-size: 1.2rem;
-            color: #f5e8d0;
-            letter-spacing: 3px;
-            margin-top: 0.15rem;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-        }
-        .ss-right .ss-shichen-desc {
-            font-size: 1.1rem;
-            color: #f0dcbe;
-            letter-spacing: 4px;
-            margin-top: 0.3rem;
-            border-right: 2px solid rgba(255,235,200,0.25);
-            padding-right: 1rem;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-        }
-        /* 中央 — 节气名淡入 */
-        .ss-center-middle {
-            grid-column: 1 / -1;
-            grid-row: 2;
-            text-align: center;
-            align-self: center;
-            justify-self: center;
-            font-size: 9rem;
-            font-weight: 200;
-            letter-spacing: 40px;
-            color: rgba(255,255,255,0.12);
-            text-shadow: 0 0 80px rgba(0,0,0,0.15);
-            animation: ssTermFade 5s ease-in-out infinite alternate;
-            pointer-events: none;
-        }
-        @keyframes ssTermFade {
-            0% { opacity: 0.10; transform: scale(0.97); }
-            100% { opacity: 0.30; transform: scale(1.03); }
-        }
-        /* 底部退出提示 */
-        .ss-bottom {
-            grid-column: 1 / -1;
-            grid-row: 3;
-            text-align: center;
-            align-self: end;
-            justify-self: center;
-            font-size: 0.9rem;
-            color: rgba(220, 208, 188, 0.25);
-            letter-spacing: 6px;
-            padding-bottom: 1rem;
-            transition: color 0.4s ease;
-        }
-        .screensaver-overlay:hover .ss-bottom {
-            color: rgba(220, 208, 188, 0.6);
-        }
-        .ss-bottom .ss-exit-hint {
-            display: inline-block;
-            padding: 0.4rem 1.4rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255,235,200,0.06);
-            background: rgba(0,0,0,0.15);
-            backdrop-filter: blur(6px);
-            transition: all 0.3s ease;
-        }
-        .screensaver-overlay:hover .ss-exit-hint {
-            border-color: rgba(255,235,200,0.12);
-            background: rgba(0,0,0,0.2);
-        }
-        /* 屏保响应式 */
-        @media (max-width: 820px) {
-            .screensaver-overlay .ss-content {
-                padding: 2rem 1.5rem;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto auto 1fr auto;
-            }
-            .ss-left { grid-column: 1; grid-row: 1; }
-            .ss-right { grid-column: 2; grid-row: 1; text-align: right; }
-            .ss-center-top { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
-            .ss-center-top .ss-ganzhi-row .gz-item .gz-char { font-size: 2.2rem; }
-            .ss-center-middle { grid-row: 3; font-size: 5rem; letter-spacing: 24px; }
-            .ss-bottom { grid-row: 4; }
-            .ss-right .ss-shichen-name { font-size: 2.6rem; }
-            .ss-left .ss-clock-hm { font-size: 3.2rem; }
-        }
-        @media (max-width: 480px) {
-            .ss-left .ss-clock-hm { font-size: 2.6rem; }
-            .ss-left .ss-date-greg { font-size: 1.3rem; }
-            .ss-left .ss-date-week { font-size: 1rem; }
-            .ss-left .ss-date-lunar { font-size: 0.95rem; }
-            .ss-right .ss-shichen-name { font-size: 2rem; letter-spacing: 6px; }
-            .ss-right .ss-shichen-period { font-size: 0.95rem; }
-            .ss-right .ss-shichen-desc { font-size: 0.9rem; }
-            .ss-center-top .ss-ganzhi-row .gz-item .gz-char { font-size: 1.6rem; }
-            .ss-center-top { padding: 0.8rem 1.2rem; }
-            .ss-center-middle { font-size: 3rem; letter-spacing: 14px; }
-        }
+                /* 左上角 — 实时时钟（放大1.5倍）+ 日期信息 */
+                .ss-left {
+                    grid-column: 1;
+                    grid-row: 1;
+                    text-align: left;
+                    align-self: start;
+                    line-height: 1.4;
+                }
+                .ss-left .ss-clock-hm {
+                    font-size: 6.3rem;
+                    font-weight: 400;
+                    letter-spacing: 10px;
+                    color: #ffffff;
+                    text-shadow: 0 3px 30px rgba(0,0,0,0.8), 0 0 60px rgba(0,0,0,0.3);
+                    font-family: 'Noto Serif SC', 'Courier New', monospace;
+                    line-height: 1.1;
+                }
+                .ss-left .ss-clock-ss {
+                    font-size: 1.8rem;
+                    font-weight: 300;
+                    letter-spacing: 6px;
+                    color: rgba(255,255,255,0.5);
+                    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+                    margin-left: 0.3rem;
+                    vertical-align: super;
+                }
+                .ss-left .ss-date-greg {
+                    font-size: 2rem;
+                    font-weight: 400;
+                    letter-spacing: 4px;
+                    color: #ffffff;
+                    text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+                    margin-top: 0.5rem;
+                }
+                .ss-left .ss-date-week {
+                    font-size: 1.5rem;
+                    color: #f5e8d0;
+                    letter-spacing: 4px;
+                    margin-top: 0.1rem;
+                    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+                }
+                .ss-left .ss-date-lunar {
+                    font-size: 0.85rem;
+                    color: #d4c4a8;
+                    letter-spacing: 2px;
+                    margin-top: 0.15rem;
+                    border-left: 1px solid rgba(255,235,200,0.2);
+                    padding-left: 0.6rem;
+                    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+                }
+                /* 中上方 — 当前节气 + 倒计时 */
+                .ss-center-top {
+                    grid-column: 2;
+                    grid-row: 1;
+                    text-align: center;
+                    align-self: start;
+                    justify-self: center;
+                    background: rgba(0,0,0,0.25);
+                    backdrop-filter: blur(14px);
+                    border-radius: 48px 16px 48px 16px;
+                    padding: 1.4rem 2.2rem;
+                    border: 1px solid rgba(255,235,200,0.12);
+                    box-shadow: 0 0 80px rgba(0,0,0,0.2);
+                    line-height: 1.6;
+                }
+                .ss-center-top .ss-center-term-name {
+                    font-size: 3.6rem;
+                    font-weight: 500;
+                    letter-spacing: 16px;
+                    color: #ffffff;
+                    text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+                }
+                .ss-center-top .ss-center-countdown {
+                    font-size: 1.3rem;
+                    color: #f0dcbe;
+                    letter-spacing: 4px;
+                    margin-top: 0.2rem;
+                    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+                }
+                .ss-center-top .ss-center-countdown .cd-next-term {
+                    color: #f5e8d0;
+                }
+                .ss-center-top .ss-center-lunar-small {
+                    font-size: 0.8rem;
+                    color: #bcaa8c;
+                    letter-spacing: 3px;
+                    margin-top: 0.35rem;
+                    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+                }
+                /* 右上角 — 十二时辰 + "当前时辰"标签 */
+                .ss-right {
+                    grid-column: 3;
+                    grid-row: 1;
+                    text-align: right;
+                    align-self: start;
+                    line-height: 1.4;
+                }
+                .ss-right .ss-shichen-label {
+                    font-size: 0.7rem;
+                    color: #bcaa8c;
+                    letter-spacing: 4px;
+                    margin-bottom: 0.1rem;
+                    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+                }
+                .ss-right .ss-shichen-name {
+                    font-size: 3.6rem;
+                    font-weight: 500;
+                    letter-spacing: 12px;
+                    color: #ffffff;
+                    text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+                }
+                .ss-right .ss-shichen-period {
+                    font-size: 1.2rem;
+                    color: #f5e8d0;
+                    letter-spacing: 3px;
+                    margin-top: 0.1rem;
+                    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+                }
+                .ss-right .ss-shichen-desc {
+                    font-size: 1.1rem;
+                    color: #f0dcbe;
+                    letter-spacing: 4px;
+                    margin-top: 0.3rem;
+                    border-right: 2px solid rgba(255,235,200,0.25);
+                    padding-right: 1rem;
+                    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+                }
+                /* 中央 — 节气名淡入（装饰性，保留但略小） */
+                .ss-center-middle {
+                    grid-column: 1 / -1;
+                    grid-row: 2;
+                    text-align: center;
+                    align-self: center;
+                    justify-self: center;
+                    font-size: 7rem;
+                    font-weight: 200;
+                    letter-spacing: 40px;
+                    color: rgba(255,255,255,0.08);
+                    text-shadow: 0 0 80px rgba(0,0,0,0.1);
+                    animation: ssTermFade 5s ease-in-out infinite alternate;
+                    pointer-events: none;
+                }
+                @keyframes ssTermFade {
+                    0% { opacity: 0.08; transform: scale(0.97); }
+                    100% { opacity: 0.25; transform: scale(1.03); }
+                }
+                /* 底部退出提示 */
+                .ss-bottom {
+                    grid-column: 1 / -1;
+                    grid-row: 3;
+                    text-align: center;
+                    align-self: end;
+                    justify-self: center;
+                    font-size: 0.9rem;
+                    color: rgba(220, 208, 188, 0.25);
+                    letter-spacing: 6px;
+                    padding-bottom: 1rem;
+                    transition: color 0.4s ease;
+                }
+                .screensaver-overlay:hover .ss-bottom {
+                    color: rgba(220, 208, 188, 0.6);
+                }
+                .ss-bottom .ss-exit-hint {
+                    display: inline-block;
+                    padding: 0.4rem 1.4rem;
+                    border-radius: 30px;
+                    border: 1px solid rgba(255,235,200,0.06);
+                    background: rgba(0,0,0,0.15);
+                    backdrop-filter: blur(6px);
+                    transition: all 0.3s ease;
+                }
+                .screensaver-overlay:hover .ss-exit-hint {
+                    border-color: rgba(255,235,200,0.12);
+                    background: rgba(0,0,0,0.2);
+                }
+                /* 屏保响应式 */
+                @media (max-width: 820px) {
+                    .screensaver-overlay .ss-content {
+                        padding: 2rem 1.5rem;
+                        grid-template-columns: 1fr 1fr;
+                        grid-template-rows: auto auto 1fr auto;
+                    }
+                    .ss-left { grid-column: 1; grid-row: 1; }
+                    .ss-right { grid-column: 2; grid-row: 1; text-align: right; }
+                    .ss-center-top { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
+                    .ss-center-top .ss-center-term-name { font-size: 2.6rem; }
+                    .ss-center-middle { grid-row: 3; font-size: 4rem; letter-spacing: 24px; }
+                    .ss-bottom { grid-row: 4; }
+                    .ss-right .ss-shichen-name { font-size: 2.6rem; }
+                    .ss-left .ss-clock-hm { font-size: 4.8rem; }
+                }
+                @media (max-width: 480px) {
+                    .ss-left .ss-clock-hm { font-size: 3.6rem; letter-spacing: 6px; }
+                    .ss-left .ss-clock-ss { font-size: 1.2rem; }
+                    .ss-left .ss-date-greg { font-size: 1.3rem; }
+                    .ss-left .ss-date-week { font-size: 1.1rem; }
+                    .ss-left .ss-date-lunar { font-size: 0.75rem; }
+                    .ss-right .ss-shichen-name { font-size: 2rem; letter-spacing: 6px; }
+                    .ss-right .ss-shichen-period { font-size: 0.95rem; }
+                    .ss-right .ss-shichen-desc { font-size: 0.9rem; }
+                    .ss-center-top { padding: 0.8rem 1.2rem; }
+                    .ss-center-top .ss-center-term-name { font-size: 2rem; letter-spacing: 8px; }
+                    .ss-center-top .ss-center-countdown { font-size: 1rem; }
+                    .ss-center-middle { font-size: 2.4rem; letter-spacing: 14px; }
+                }
         footer {
             text-align: center;
             padding: 3rem 2rem 2rem;
@@ -1500,8 +1508,8 @@
                 <h1>⏳ 节气钟 <small>· 廿四</small></h1>
                 <span style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
                     <span class="chinese-now" id="currentTermTag">立春</span>
-                    <button class="fullscreen-btn" id="fullscreenBtn" title="进入全屏屏保">
-                        <span class="btn-icon">⛰</span> 入屏
+                                        <button class="fullscreen-btn" id="fullscreenBtn" title="进入全屏屏保">
+                        <span class="btn-icon">⛰</span> 进入屏保状态
                     </button>
                 </span>
             </div>
@@ -1519,9 +1527,9 @@
                         <div class="term-label">🌿 今时节气</div>
                         <div class="term-name" id="solarTermName">立春 <small>正月节</small></div>
                     </div>
-                    <div class="countdown-box">
+                                        <div class="countdown-box">
                         <div class="countdown-number" id="countdownDays">--</div>
-                        <span class="countdown-label">距 ～ 雨水 ～</span>
+                        <span class="countdown-label" id="countdownLabel">距 ～ <span id="countdownNextTerm">雨水</span> ～</span>
                     </div>
                 </div>
             </div>
@@ -1567,19 +1575,18 @@
                 <div class="ss-date-week" id="ssDateWeek">星期零</div>
                 <div class="ss-date-lunar" id="ssDateLunar">甲子年 · 冬月三十</div>
             </div>
-            <div class="ss-center-top">
-                <div class="ss-ganzhi-row">
-                    <div class="gz-item"><span class="gz-char" id="ssGanZhiYear">甲子</span><span class="gz-label">年</span></div>
-                    <div class="gz-item"><span class="gz-char" id="ssGanZhiMonth">甲子</span><span class="gz-label">月</span></div>
-                    <div class="gz-item"><span class="gz-char" id="ssGanZhiDay">甲子</span><span class="gz-label">日</span></div>
-                </div>
+                        <div class="ss-center-top">
+                <div class="ss-center-term-name" id="ssTermName">立春</div>
+                <div class="ss-center-countdown" id="ssCountdown">距 <span class="cd-next-term" id="ssNextTermName">雨水</span> 还有 <span id="ssCountdownDays">--</span> 天</div>
+                <div class="ss-center-lunar-small" id="ssLunarSmall">甲子年 · 甲子月 · 甲子日</div>
             </div>
             <div class="ss-right">
+                <div class="ss-shichen-label">当前时辰</div>
                 <div class="ss-shichen-name" id="ssShiChen">子时</div>
                 <div class="ss-shichen-period" id="ssShiChenPeriod">23:00-01:00</div>
                 <div class="ss-shichen-desc" id="ssShiChenDesc">夜半·星汉低垂</div>
             </div>
-            <div class="ss-center-middle" id="ssTermName">立春</div>
+            <div class="ss-center-middle" id="ssTermNameBg">立春</div>
             <div class="ss-bottom">
                 <span class="ss-exit-hint">✕ 轻触退出屏保</span>
             </div>
@@ -1864,19 +1871,26 @@
             for (let y = year - 1; y <= year + 1; y++)
                 for (let i = 0; i < 24; i++)
                     candidates.push({ date: getTermDate(y, i), index: i, name: TERM_NAMES[i] });
-            candidates.sort((a,b) => a.date - b.date);
+                        candidates.sort((a,b) => a.date - b.date);
             let next = null, prev = null;
             for (let i = 0; i < candidates.length; i++) {
-                if (candidates[i].date > nowDate) { next = candidates[i]; if (i > 0) prev = candidates[i-1]; break; }
+                if (candidates[i].date >= nowDate) { next = candidates[i]; if (i > 0) prev = candidates[i-1]; break; }
             }
             if (!next) { prev = candidates[candidates.length-2]; next = candidates[candidates.length-1]; }
-            if (!prev) { let idx = candidates.indexOf(next); if (idx > 0) prev = candidates[idx-1]; else prev = next; }
+            if (!prev) { prev = candidates[candidates.length-2]; }
+            // 检查 prev 是否确实在当前时间之前；如果 prev 也在当前时间之后，再往前找
+            if (prev && prev.date > nowDate) {
+                let idx = candidates.indexOf(prev);
+                while (idx > 0 && candidates[idx].date > nowDate) { idx--; }
+                prev = candidates[idx];
+            }
             return { prev, next, current: prev };
         }
         const clockEl = document.getElementById('clockDisplay');
         const dateEl = document.getElementById('dateDisplay');
         const termNameEl = document.getElementById('solarTermName');
         const countdownEl = document.getElementById('countdownDays');
+        const countdownNextTerm = document.getElementById('countdownNextTerm');
         const currentTermTag = document.getElementById('currentTermTag');
         const prevHint = document.getElementById('prevTermHint');
         const currentHint = document.getElementById('currentTermHint');
@@ -1894,6 +1908,8 @@
             const currentTerm = info.current, nextTerm = info.next;
             termNameEl.innerHTML = currentTerm.name+' <small>· '+nextTerm.name+'前</small>';
             currentTermTag.textContent = currentTerm.name;
+            // 动态更新 countdown 标签中的下一节气名
+            if (countdownNextTerm) countdownNextTerm.textContent = nextTerm.name;
             const diffMs = nextTerm.date.getTime() - now.getTime();
             let diffDays = Math.floor(diffMs/(1000*60*60*24)), diffHours = Math.floor((diffMs%(1000*60*60*24))/(1000*60*60));
             let countdownStr = diffDays > 0 ? diffDays+'天'+diffHours+'时' : diffHours+'时'+Math.floor((diffMs%(1000*60*60))/(1000*60))+'分';
@@ -1992,19 +2008,15 @@
             const weekDays = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
             document.getElementById('ssDateWeek').textContent = weekDays[now.getDay()];
 
-            // 农历年月日（使用天干地支）
+                        // 农历年月日（使用天干地支，缩小放在中间下方）
             const stems = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
             const branches = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
             const yearStem = stems[(y - 4) % 10];
             const yearBranch = branches[(y - 4) % 12];
             const gzMonth = getGanZhiMonth(y, m);
             const gzDay = getGanZhiDay(y, m, d);
-            document.getElementById('ssDateLunar').textContent = yearStem+yearBranch+'年 · '+gzMonth+'月'+gzDay+'日';
-
-            // 天干地支（年月日分开）
-            document.getElementById('ssGanZhiYear').textContent = yearStem+yearBranch;
-            document.getElementById('ssGanZhiMonth').textContent = gzMonth;
-            document.getElementById('ssGanZhiDay').textContent = gzDay;
+            document.getElementById('ssDateLunar').textContent = yearStem+yearBranch+'年 · '+gzMonth+'月 · '+gzDay+'日';
+            document.getElementById('ssLunarSmall').textContent = yearStem+yearBranch+'年 · '+gzMonth+'月 · '+gzDay+'日';
 
             // 十二时辰
             const sc = getShiChen(h);
@@ -2012,9 +2024,22 @@
             document.getElementById('ssShiChenPeriod').textContent = sc.period;
             document.getElementById('ssShiChenDesc').textContent = sc.desc;
 
-            // 中央节气名
+            // 中央 — 当前节气名 + 倒计时 + 下一节气名
             const curTerm = document.getElementById('currentTermTag');
-            if (curTerm) document.getElementById('ssTermName').textContent = curTerm.textContent;
+            if (curTerm) {
+                document.getElementById('ssTermName').textContent = curTerm.textContent;
+                document.getElementById('ssTermNameBg').textContent = curTerm.textContent;
+            }
+            // 利用节气钟已有的倒计时数据
+            const nextTermEl = document.getElementById('nextTermHint');
+            const countdownEl2 = document.getElementById('countdownDays');
+            if (nextTermEl) {
+                var nextTermText = nextTermEl.textContent.replace(/➜\s*/,'');
+                document.getElementById('ssNextTermName').textContent = nextTermText;
+            }
+            if (countdownEl2) {
+                document.getElementById('ssCountdownDays').textContent = countdownEl2.textContent;
+            }
         }
 
         if (fullscreenBtn && ssOverlay) {
