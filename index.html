@@ -745,193 +745,272 @@
             font-size: 2rem;
             cursor: pointer;
         }
-                /* ===== 节气钟样式 ===== */
-        .solar-clock-section {
-            max-width: 720px;
-            width: 100%;
-            margin: 0 auto 2.5rem;
-            background: rgba(252, 249, 240, 0.75);
-            backdrop-filter: blur(4px);
-            border-radius: 48px 48px 40px 40px;
-            padding: 2rem 1.8rem 2.2rem;
-            box-shadow: 0 20px 40px -12px rgba(90, 70, 50, 0.3), inset 0 1px 4px rgba(255, 245, 225, 0.8);
-            border: 1px solid #d6cbb4;
-            font-family: 'Noto Serif SC', '华文楷体', 'KaiTi', 'SimSun', serif;
-        }
-        .solar-clock-section .header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: baseline;
-            border-bottom: 2px solid #b7a88b;
-            padding-bottom: 0.5rem;
-            margin-bottom: 2rem;
-        }
-        .solar-clock-section .header h1 {
-            font-size: 1.8rem;
-            font-weight: 500;
-            letter-spacing: 6px;
-            color: #4f3f2b;
-            text-shadow: 2px 2px 0 rgba(180, 150, 120, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin: 0;
-        }
-        .solar-clock-section .header h1 small {
-            font-size: 0.9rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            color: #7b6a51;
-            margin-left: 0.6rem;
-        }
-        .solar-clock-section .chinese-now {
-            font-size: 1rem;
-            background: #dacfba;
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            color: #3f3322;
-            border: 1px solid #c0af91;
-            box-shadow: inset 0 1px 3px rgba(255, 242, 220, 0.6);
-            white-space: nowrap;
-        }
-        .clock-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 1.6rem;
-        }
-        .clock-display .digital-clock {
-            font-size: 3.6rem;
-            font-weight: 400;
-            letter-spacing: 8px;
-            color: #2d2419;
-            background: #ece4d5;
-            padding: 0.2rem 1.8rem 0.2rem 2.2rem;
-            border-radius: 60px;
-            display: inline-block;
-            border: 1px solid #cbbca2;
-            box-shadow: inset 0 2px 6px rgba(110, 85, 60, 0.08), 0 6px 12px rgba(100, 80, 55, 0.08);
-            font-family: 'Noto Serif SC', 'Courier New', monospace;
-            backdrop-filter: blur(2px);
-            margin-bottom: 0.4rem;
-        }
-        .clock-display .date-tag {
-            display: flex;
-            gap: 1.2rem;
-            font-size: 1.05rem;
-            color: #5f4d34;
-            background: #efe7da;
-            padding: 0.3rem 1.8rem;
-            border-radius: 40px;
-            border: 1px solid #cbbc9e;
-            letter-spacing: 1px;
-        }
-        .solar-term-card {
-            background: #e6ddcb;
-            border-radius: 80px 20px 80px 20px;
-            padding: 1.4rem 1.6rem;
-            margin: 1.6rem 0 1.4rem;
-            border-left: 6px solid #a0845c;
-            border-right: 2px solid #b6a282;
-            background: linear-gradient(135deg, #ede3d1, #dfd4be);
-            box-shadow: 0 6px 14px rgba(70, 55, 35, 0.12);
-        }
-        .solar-term-card .term-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.8rem 0.2rem;
-        }
-        .solar-term-card .term-label {
-            font-size: 0.9rem;
-            color: #5b4a32;
-            letter-spacing: 2px;
-            font-weight: 400;
-        }
-        .solar-term-card .term-name {
-            font-size: 2.4rem;
-            font-weight: 500;
-            color: #382e1e;
-            letter-spacing: 8px;
-            line-height: 1.2;
-        }
-        .solar-term-card .term-name small {
-            font-size: 0.95rem;
-            letter-spacing: 2px;
-            color: #6f5b3e;
-            margin-left: 0.6rem;
-        }
-        .solar-term-card .countdown-box {
-            background: #f2ecdf;
-            padding: 0.5rem 1.2rem;
-            border-radius: 60px;
-            border: 1px solid #cbb692;
-            box-shadow: inset 0 1px 4px #faf3e2;
-            min-width: 130px;
-            text-align: center;
-        }
-        .solar-term-card .countdown-number {
-            font-size: 1.6rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            color: #2f2417;
-            font-family: 'Noto Serif SC', monospace;
-        }
-        .solar-term-card .countdown-label {
-            font-size: 0.75rem;
-            color: #6d5a3d;
-            display: block;
-            margin-top: -2px;
-        }
-        .sub-term-hint {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            flex-wrap: wrap;
-            color: #5f4d34;
-            font-size: 0.92rem;
-            background: rgba(220, 208, 186, 0.3);
-            padding: 0.6rem 0.8rem;
-            border-radius: 48px;
-            border: 1px dashed #bcab8b;
-            margin-top: 0.2rem;
-        }
-        .sub-term-hint span {
-            background: #eee5d4;
-            padding: 0.2rem 0.9rem;
-            border-radius: 30px;
-            border: 1px solid #bbaa88;
-        }
-        /* 留言板嵌入区域 — Giscus */
-        .giscus-placeholder {
-            margin-top: 2.4rem;
-            padding-top: 1.6rem;
-            border-top: 1px solid #cbbc9e;
-        }
-        .giscus-label {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: #4f3f2b;
-            margin-bottom: 1rem;
-            font-weight: 400;
-            letter-spacing: 3px;
-        }
-        #giscusContainer {
-            background: #f2ecdf;
-            border-radius: 28px;
-            padding: 1rem 0.8rem;
-            border: 1px solid #cbb692;
-            min-height: 100px;
-        }
-        @media (max-width: 520px) {
-            .solar-clock-section { padding: 1.5rem 1rem; }
-            .solar-clock-section .digital-clock { font-size: 2.6rem; letter-spacing: 4px; padding: 0.2rem 1rem; }
-            .solar-clock-section .term-name { font-size: 2rem; }
-            .solar-clock-section .header h1 { font-size: 1.5rem; }
-        }
+                /* ===== 节气钟样式 — 中国风·以节气钟.jpg为背景 ===== */
+                .solar-clock-section {
+                    position: relative;
+                    max-width: 760px;
+                    width: 100%;
+                    margin: 0 auto 2.5rem;
+                    border-radius: 56px 24px 56px 24px;
+                    overflow: hidden;
+                    box-shadow: 0 30px 60px -16px rgba(60, 45, 30, 0.45),
+                                0 0 0 1px rgba(200, 178, 148, 0.5);
+                    font-family: 'Noto Serif SC', '华文楷体', 'KaiTi', 'SimSun', serif;
+                }
+                /* 背景图 — 节气钟.jpg 全幅铺满 */
+                .solar-clock-section .clock-bg-layer {
+                    position: absolute;
+                    inset: 0;
+                    background-image: url('./image/节气钟.jpg');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    filter: brightness(0.62) saturate(1.06) contrast(1.02);
+                    z-index: 0;
+                    transition: filter 0.6s ease;
+                }
+                /* 半透明绢帛遮罩 — 仿古宣纸/绡纱质感 */
+                .solar-clock-section .clock-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(135deg,
+                        rgba(245, 235, 218, 0.50) 0%,
+                        rgba(210, 192, 165, 0.30) 50%,
+                        rgba(240, 226, 204, 0.45) 100%);
+                    z-index: 1;
+                    pointer-events: none;
+                }
+                /* 内容层 */
+                .solar-clock-section .clock-content {
+                    position: relative;
+                    z-index: 2;
+                    padding: 2.6rem 2.2rem 2.8rem;
+                    color: #f5efe2;
+                    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+                }
+                /* 仿古窗棂/冰裂纹装饰边框 */
+                .solar-clock-section .clock-content::before {
+                    content: '';
+                    position: absolute;
+                    pointer-events: none;
+                    top: 20px; left: 20px; right: 20px; bottom: 20px;
+                    border-radius: 48px 16px 48px 16px;
+                    border: 1px solid rgba(232, 220, 200, 0.22);
+                    box-shadow: inset 0 0 50px rgba(200, 180, 150, 0.05);
+                }
+                .solar-clock-section .header {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    align-items: baseline;
+                    padding-bottom: 0.6rem;
+                    margin-bottom: 2rem;
+                    border-bottom: 1px solid rgba(232, 220, 200, 0.32);
+                }
+                .solar-clock-section .header h1 {
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    letter-spacing: 8px;
+                    color: #f5efe2;
+                    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+                    display: flex;
+                    align-items: center;
+                    gap: 0.4rem;
+                    margin: 0;
+                }
+                .solar-clock-section .header h1 small {
+                    font-size: 0.85rem;
+                    font-weight: 300;
+                    letter-spacing: 3px;
+                    color: #dacdb6;
+                    margin-left: 0.6rem;
+                    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+                }
+                .solar-clock-section .chinese-now {
+                    font-size: 1rem;
+                    background: rgba(200, 180, 155, 0.30);
+                    backdrop-filter: blur(6px);
+                    padding: 0.3rem 1.2rem;
+                    border-radius: 30px;
+                    color: #f5efe2;
+                    border: 1px solid rgba(232, 220, 200, 0.25);
+                    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+                    white-space: nowrap;
+                    letter-spacing: 2px;
+                }
+                .clock-display {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-bottom: 2rem;
+                }
+                .clock-display .time-ring {
+                    position: relative;
+                    background: rgba(30, 25, 18, 0.28);
+                    backdrop-filter: blur(12px);
+                    border-radius: 50%;
+                    padding: 0.5rem 2.6rem;
+                    border: 2px solid rgba(232, 220, 200, 0.25);
+                    box-shadow: 0 0 50px rgba(0,0,0,0.22),
+                                inset 0 0 30px rgba(200, 180, 150, 0.04);
+                    margin-bottom: 0.6rem;
+                }
+                .clock-display .time-ring::after {
+                    content: '⌾';
+                    position: absolute;
+                    right: -8px; top: 50%;
+                    transform: translateY(-50%);
+                    font-size: 1.4rem;
+                    color: rgba(232, 213, 182, 0.20);
+                    text-shadow: 0 0 20px rgba(200, 180, 140, 0.1);
+                }
+                .clock-display .digital-clock {
+                    font-size: 3.8rem;
+                    font-weight: 400;
+                    letter-spacing: 10px;
+                    color: #f5efe2;
+                    font-family: 'Noto Serif SC', 'Courier New', monospace;
+                    text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+                    line-height: 1.3;
+                }
+                .clock-display .date-tag {
+                    display: flex;
+                    gap: 0.8rem;
+                    font-size: 1.05rem;
+                    color: #ddd0bc;
+                    background: rgba(40, 32, 24, 0.20);
+                    backdrop-filter: blur(6px);
+                    padding: 0.3rem 1.8rem;
+                    border-radius: 40px;
+                    border: 1px solid rgba(232, 220, 200, 0.12);
+                    letter-spacing: 2px;
+                    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+                }
+                .solar-term-card {
+                    background: rgba(40, 32, 24, 0.18);
+                    backdrop-filter: blur(12px);
+                    border-radius: 80px 16px 80px 16px;
+                    padding: 1.5rem 1.8rem;
+                    margin: 1.8rem 0 1.4rem;
+                    border: 1px solid rgba(232, 220, 200, 0.15);
+                    box-shadow: 0 8px 32px rgba(0,0,0,0.12),
+                                inset 0 1px 0 rgba(255,245,225,0.06);
+                }
+                .solar-term-card .term-row {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 0.8rem 0.4rem;
+                }
+                .solar-term-card .term-label {
+                    font-size: 0.85rem;
+                    color: #d4c8b2;
+                    letter-spacing: 4px;
+                    font-weight: 300;
+                    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+                }
+                .solar-term-card .term-name {
+                    font-size: 2.6rem;
+                    font-weight: 500;
+                    color: #f5efe2;
+                    letter-spacing: 12px;
+                    line-height: 1.2;
+                    text-shadow: 0 2px 16px rgba(0,0,0,0.6);
+                }
+                .solar-term-card .term-name small {
+                    font-size: 1rem;
+                    letter-spacing: 3px;
+                    color: #cfc1a8;
+                    margin-left: 0.6rem;
+                    font-weight: 300;
+                    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+                }
+                .solar-term-card .countdown-box {
+                    background: rgba(30, 25, 18, 0.22);
+                    backdrop-filter: blur(8px);
+                    padding: 0.5rem 1.4rem;
+                    border-radius: 60px;
+                    border: 1px solid rgba(232, 220, 200, 0.12);
+                    min-width: 140px;
+                    text-align: center;
+                    box-shadow: inset 0 0 20px rgba(200, 180, 150, 0.02);
+                }
+                .solar-term-card .countdown-number {
+                    font-size: 1.7rem;
+                    font-weight: 400;
+                    letter-spacing: 2px;
+                    color: #f5efe2;
+                    font-family: 'Noto Serif SC', monospace;
+                    text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+                }
+                .solar-term-card .countdown-label {
+                    font-size: 0.7rem;
+                    color: #cdc0a8;
+                    display: block;
+                    margin-top: -2px;
+                    letter-spacing: 2px;
+                    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+                }
+                .sub-term-hint {
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    flex-wrap: wrap;
+                    color: #ddd0bc;
+                    font-size: 0.92rem;
+                    background: rgba(40, 32, 24, 0.12);
+                    backdrop-filter: blur(6px);
+                    padding: 0.5rem 0.8rem;
+                    border-radius: 48px;
+                    border: 1px dashed rgba(232, 220, 200, 0.12);
+                    margin-top: 0.2rem;
+                    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+                }
+                .sub-term-hint span {
+                    background: rgba(200, 180, 155, 0.08);
+                    backdrop-filter: blur(4px);
+                    padding: 0.15rem 1rem;
+                    border-radius: 30px;
+                    border: 1px solid rgba(232, 220, 200, 0.06);
+                }
+                /* 留言板嵌入区域 — Giscus */
+                .giscus-placeholder {
+                    margin-top: 2.4rem;
+                    padding-top: 1.6rem;
+                    border-top: 1px solid rgba(232, 220, 200, 0.12);
+                }
+                .giscus-label {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.6rem;
+                    color: #ddd0bc;
+                    margin-bottom: 1rem;
+                    font-weight: 400;
+                    letter-spacing: 4px;
+                    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+                }
+                #giscusContainer {
+                    background: rgba(40, 32, 24, 0.12);
+                    backdrop-filter: blur(8px);
+                    border-radius: 28px;
+                    padding: 1rem 0.8rem;
+                    border: 1px solid rgba(232, 220, 200, 0.06);
+                    min-height: 100px;
+                }
+                @media (max-width: 560px) {
+                    .solar-clock-section .clock-content { padding: 2rem 1.2rem; }
+                    .solar-clock-section .digital-clock { font-size: 2.8rem; letter-spacing: 6px; }
+                    .solar-clock-section .time-ring { padding: 0.4rem 1.6rem; }
+                    .solar-clock-section .term-name { font-size: 2.2rem; letter-spacing: 8px; }
+                    .solar-clock-section .header h1 { font-size: 1.5rem; letter-spacing: 4px; }
+                    .solar-clock-section .header h1 small { font-size: 0.75rem; }
+                    .solar-clock-section { border-radius: 40px 16px 40px 16px; }
+                }
+                @media (max-width: 400px) {
+                    .solar-clock-section .digital-clock { font-size: 2.2rem; letter-spacing: 4px; }
+                    .solar-clock-section .term-name { font-size: 1.8rem; letter-spacing: 6px; }
+                }
         footer {
             text-align: center;
             padding: 3rem 2rem 2rem;
@@ -1109,55 +1188,64 @@
 
         </div>  <!-- /container -->
 
-    <!-- ===== 节气钟 + 留言板 ===== -->
+        <!-- ===== 节气钟 + 留言板（节气钟.jpg 为背景 · 中国风） ===== -->
     <div class="solar-clock-section" id="solarClockSection">
-        <div class="header">
-            <h1>☯ 节气钟 <small>· 廿四</small></h1>
-            <span class="chinese-now" id="currentTermTag">立春</span>
-        </div>
+        <!-- 背景图 -->
+        <div class="clock-bg-layer"></div>
+        <!-- 绢帛遮罩 -->
+        <div class="clock-overlay"></div>
+        <!-- 内容 -->
+        <div class="clock-content">
+            <div class="header">
+                <h1>⏳ 节气钟 <small>· 廿四</small></h1>
+                <span class="chinese-now" id="currentTermTag">立春</span>
+            </div>
 
-        <div class="clock-display">
-            <div class="digital-clock" id="clockDisplay">00:00:00</div>
-            <div class="date-tag" id="dateDisplay">乙巳年 · 正月廿三</div>
-        </div>
-
-        <div class="solar-term-card">
-            <div class="term-row">
-                <div>
-                    <div class="term-label">🌿 今时节气</div>
-                    <div class="term-name" id="solarTermName">立春 <small>正月节</small></div>
+            <div class="clock-display">
+                <div class="time-ring">
+                    <div class="digital-clock" id="clockDisplay">00:00:00</div>
                 </div>
-                <div class="countdown-box">
-                    <div class="countdown-number" id="countdownDays">--</div>
-                    <span class="countdown-label">距 ～ 雨水 ～</span>
+                <div class="date-tag" id="dateDisplay">乙巳年 · 正月廿三</div>
+            </div>
+
+            <div class="solar-term-card">
+                <div class="term-row">
+                    <div>
+                        <div class="term-label">🌿 今时节气</div>
+                        <div class="term-name" id="solarTermName">立春 <small>正月节</small></div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-number" id="countdownDays">--</div>
+                        <span class="countdown-label">距 ～ 雨水 ～</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="sub-term-hint">
-            <span id="prevTermHint">❀ 大寒</span>
-            <span id="currentTermHint">● 立春</span>
-            <span id="nextTermHint">➜ 雨水</span>
-        </div>
+            <div class="sub-term-hint">
+                <span id="prevTermHint">❀ 大寒</span>
+                <span id="currentTermHint">● 立春</span>
+                <span id="nextTermHint">➜ 雨水</span>
+            </div>
 
-        <div class="giscus-placeholder">
-            <div class="giscus-label">💬 留墨 · 闲话廿四</div>
-            <div id="giscusContainer">
-                <script src="https://giscus.app/client.js"
-                    data-repo="uu-er521/24-solar-term"
-                    data-repo-id="R_kgDOSgojcA"
-                    data-category="General"
-                    data-category-id="DIC_kwDOSgojcM4C-AJ6"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="bottom"
-                    data-theme="preferred_color_scheme"
-                    data-lang="zh-CN"
-                    crossorigin="anonymous"
-                    async>
-                </script>
+            <div class="giscus-placeholder">
+                <div class="giscus-label">💬 留墨 · 闲话廿四</div>
+                <div id="giscusContainer">
+                    <script src="https://giscus.app/client.js"
+                        data-repo="uu-er521/24-solar-term"
+                        data-repo-id="R_kgDOSgojcA"
+                        data-category="General"
+                        data-category-id="DIC_kwDOSgojcM4C-AJ6"
+                        data-mapping="pathname"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="preferred_color_scheme"
+                        data-lang="zh-CN"
+                        crossorigin="anonymous"
+                        async>
+                    </script>
+                </div>
             </div>
         </div>
     </div>
