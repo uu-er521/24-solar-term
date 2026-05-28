@@ -1087,8 +1087,11 @@
             font-family: 'Noto Serif SC', '华文楷体', 'KaiTi', 'SimSun', serif;
             color: #f0e8d8;
             text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-            cursor: pointer;
+                        cursor: pointer;
             user-select: none;
+            -webkit-user-drag: none;
+            user-drag: none;
+            -webkit-touch-callout: none;
         }
         .screensaver-overlay.active {
             display: block;
@@ -2042,47 +2045,49 @@
             }
         }
 
-        if (fullscreenBtn && ssOverlay) {
-            fullscreenBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                // 更新屏保数据
-                updateScreensaver();
-                // 启用屏保
-                ssOverlay.classList.add('active');
-                // 请求全屏
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen().catch(function(err) {
-                        // 某些浏览器或环境不支持全屏API，忽略
+                if (fullscreenBtn && ssOverlay) {
+                    fullscreenBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // 更新屏保数据
+                        updateScreensaver();
+                        // 启用屏保（纯 CSS 全屏模拟，不调用浏览器全屏 API，避免 http://127 问题）
+                        ssOverlay.classList.add('active');
+                        // 屏保内每秒更新
+                        if (window._ssTimer) clearInterval(window._ssTimer);
+                        window._ssTimer = setInterval(updateScreensaver, 1000);
+                    });
+
+                    // 点击屏保退出（使用 mouseup 替代 click，避免与全屏点击冲突）
+                    ssOverlay.addEventListener('mouseup', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        exitScreenSaver();
+                    });
+
+                    // 触摸设备支持
+                    ssOverlay.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        exitScreenSaver();
+                    });
+
+                    function exitScreenSaver() {
+                        ssOverlay.classList.remove('active');
+                        if (window._ssTimer) {
+                            clearInterval(window._ssTimer);
+                            window._ssTimer = null;
+                        }
+                    }
+
+                    // ESC 键退出屏保
+                    document.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape' && ssOverlay.classList.contains('active')) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            exitScreenSaver();
+                        }
                     });
                 }
-                // 屏保内每秒更新
-                if (window._ssTimer) clearInterval(window._ssTimer);
-                window._ssTimer = setInterval(updateScreensaver, 1000);
-            });
-
-            // 点击屏保退出
-            ssOverlay.addEventListener('click', function() {
-                ssOverlay.classList.remove('active');
-                if (window._ssTimer) {
-                    clearInterval(window._ssTimer);
-                    window._ssTimer = null;
-                }
-                if (document.exitFullscreen) {
-                    document.exitFullscreen().catch(function(err) {});
-                }
-            });
-
-            // ESC 键退出屏保
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && ssOverlay.classList.contains('active')) {
-                    ssOverlay.classList.remove('active');
-                    if (window._ssTimer) {
-                        clearInterval(window._ssTimer);
-                        window._ssTimer = null;
-                    }
-                }
-            });
-        }
     })();
 </script>
 </body>
