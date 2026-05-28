@@ -673,33 +673,48 @@
 
         /* 节气韵味花信风格 */
         .flower-news {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0.5rem;
             background: #fffaf0;
             border-radius: 48px;
-            padding: 2rem;
+            padding: 1.5rem;
             margin: 2rem 0;
-            font-size: 0.92rem;
-            line-height: 1.7;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
         .flower-item {
-            flex: 1;
-            min-width: 180px;
             text-align: center;
-            padding: 1rem;
+            padding: 0.7rem 0.5rem;
+            border-radius: 16px;
+            background: rgba(255, 248, 240, 0.6);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .flower-item:hover {
+            background: rgba(255, 255, 245, 1);
+            transform: translateY(-2px);
         }
         .flower-item span {
             display: block;
-            font-size: 1.35rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        /* 三候列表响应式适配 */
+        @media (max-width: 1200px) {
+            .flower-news { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .flower-news { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .flower-news { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 400px) {
+            .flower-news { grid-template-columns: 1fr; }
         }
 
         /* 模态框高级 */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
             width: 100%; height: 100%;
             background: rgba(20, 12, 5, 0.85);
             backdrop-filter: blur(10px);
@@ -876,20 +891,31 @@
 
     <!-- 花信风及物候文化展示 -->
     <div class="flower-news slide-section" id="flowerNews">
-        <div class="flower-item" style="color:#b3772e;"><span>🍃</span><h4>立春三候</h4><p>一候迎春<br>二候樱桃<br>三候望春</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>🪶</span><h4>雨水三候</h4><p>一候菜花<br>二候杏花<br>三候李花</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>🌳</span><h4>惊蛰三候</h4><p>一候桃花<br>二候棣棠<br>三候蔷薇</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>🌤</span><h4>春分三候</h4><p>一候海棠<br>二候梨花<br>三候木兰</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>🌱</span><h4>立夏三候</h4><p>一候蝼蝈鸣<br>二候蚯蚓出<br>三候戴胜降</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>💨</span><h4>芒种三候</h4><p>一候螳螂生<br>二候反舌无声<br>三候蜩始鸣</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>☀️</span><h4>夏至三候</h4><p>一候鹿角解<br>二候半夏生<br>三候莓始华</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>☂️</span><h4>立秋三候</h4><p>一候凉风至<br>二候白露降<br>三候寒蝉响</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>🍎</span><h4>处暑三候</h4><p>一候鹰乃祭鸟<br>二候天地始肃<br>三候禾乃报歉</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>🍃</span><h4>秋分三候</h4><p>一候玄鸟归<br>二候雷始收<br>三候蛰虫坯</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>❄️</span><h4>立冬三候</h4><p>一候水始冰<br>二候地始冻<br>三候雉入大水为蜃</p></div>
-        <div class="flower-item" style="color:#b3772e;"><span>🌙</span><h4>大寒三候</h4><p>一候鹖鵲不鸣<br>二候虎始交<br>三候荔挺生</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌱</span><h4>立春三候</h4><p>一候东风解冻<br>二候蛰虫始振<br>三候鱼陟负冰</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌧️</span><h4>雨水三候</h4><p>一候獭祭鱼<br>二候鸿雁来<br>三候草木萌动</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>⚡</span><h4>惊蛰三候</h4><p>一候桃始华<br>二候仓庚黄鹂鸣<br>三候鹰化为鸠</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌸</span><h4>春分三候</h4><p>一候玄鸟至<br>二候雷乃发声<br>三候始电</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌿</span><h4>清明三候</h4><p>一候桐始华<br>二候田鼠化为鴽<br>三候虹始见</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌾</span><h4>谷雨三候</h4><p>一候萍始生<br>二候鸣鸠拂其羽<br>三候戴胜降于桑</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>☀️</span><h4>立夏三候</h4><p>一候蝼蝈鸣<br>二候蚯蚓出<br>三候王瓜生</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌻</span><h4>小满三候</h4><p>一候苦菜秀<br>二候靡草死<br>三候麦秋至</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌽</span><h4>芒种三候</h4><p>一候螳螂生<br>二候鵙始鸣<br>三候反舌无声</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🔥</span><h4>夏至三候</h4><p>一候鹿角解<br>二候蝉始鸣<br>三候半夏生</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>💦</span><h4>小暑三候</h4><p>一候温风至<br>二候蟋蟀居宇<br>三候鹰始鸷</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌡️</span><h4>大暑三候</h4><p>一候腐草为萤<br>二候土润溽暑<br>三候大雨时行</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🍂</span><h4>立秋三候</h4><p>一候凉风至<br>二候白露降<br>三候寒蝉鸣</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🍁</span><h4>处暑三候</h4><p>一候鹰乃祭鸟<br>二候天地始肃<br>三候禾乃登</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>💧</span><h4>白露三候</h4><p>一候鸿雁来<br>二候玄鸟归<br>三候群鸟养羞</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌕</span><h4>秋分三候</h4><p>一候雷始收声<br>二候蛰虫坯户<br>三候水始涸</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🥶</span><h4>寒露三候</h4><p>一候鸿雁来宾<br>二候雀入大水为蛤<br>三候菊有黄华</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>❄️</span><h4>霜降三候</h4><p>一候豺乃祭兽<br>二候草木黄落<br>三候蛰虫咸俯</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>⛄</span><h4>立冬三候</h4><p>一候水始冰<br>二候地始冻<br>三候雉入大水为蜃</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🌨️</span><h4>小雪三候</h4><p>一候虹藏不见<br>二候天气上升地气下降<br>三候闭塞而成冬</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>❄️</span><h4>大雪三候</h4><p>一候鹖鴠不鸣<br>二候虎始交<br>三候荔挺出</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🥟</span><h4>冬至三候</h4><p>一候蚯蚓结<br>二候麋角解<br>三候水泉动</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🧊</span><h4>小寒三候</h4><p>一候雁北乡<br>二候鹊始巢<br>三候雉始鸲</p></div>
+        <div class="flower-item" style="color:#b3772e;"><span>🏔️</span><h4>大寒三候</h4><p>一候鸡始乳<br>二候征鸟厉疾<br>三候水泽腹坚</p></div>
     </div>
-</div>
 
 <footer>
     <button class="back-to-top" id="backToTopBtn" aria-label="返回顶部">
