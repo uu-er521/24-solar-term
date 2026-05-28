@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>节气钟 · 廿四风物</title>
+  <!-- 柔和中国风基调 -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f3efe6;  /* 宣纸底色 */
+      background-image: radial-gradient(circle at 20% 30%, rgba(200, 180, 150, 0.1) 0%, transparent 40%),
+                        linear-gradient(145deg, #e8e0d0 0%, #d6cebc 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Noto Serif SC', '华文楷体', 'KaiTi', 'SimSun', serif;
+      padding: 1.5rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 720px;
+      width: 100%;
+      background: rgba(252, 249, 240, 0.75);
+      backdrop-filter: blur(4px);
+      border-radius: 48px 48px 40px 40px;
+      padding: 2.4rem 2rem 2.8rem;
+      box-shadow: 0 20px 40px -12px rgba(90, 70, 50, 0.3),
+                  inset 0 1px 4px rgba(255, 245, 225, 0.8);
+      border: 1px solid #d6cbb4;
+      transition: box-shadow 0.3s ease;
+    }
+
+    /* 标题区 — 廿四节气印 */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid #b7a88b;
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: 6px;
+      color: #4f3f2b;
+      text-shadow: 2px 2px 0 rgba(180, 150, 120, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .header h1 small {
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      color: #7b6a51;
+      margin-left: 0.6rem;
+    }
+    .chinese-now {
+      font-size: 1rem;
+      background: #dacfba;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      color: #3f3322;
+      border: 1px solid #c0af91;
+      box-shadow: inset 0 1px 3px rgba(255, 242, 220, 0.6);
+      white-space: nowrap;
+    }
+
+    /* 时钟主体 */
+    .clock-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .digital-clock {
+      font-size: 3.8rem;
+      font-weight: 400;
+      letter-spacing: 8px;
+      color: #2d2419;
+      background: #ece4d5;
+      padding: 0.2rem 1.8rem 0.2rem 2.2rem;
+      border-radius: 60px;
+      display: inline-block;
+      border: 1px solid #cbbca2;
+      box-shadow: inset 0 2px 6px rgba(110, 85, 60, 0.08), 0 6px 12px rgba(100, 80, 55, 0.08);
+      font-family: 'Noto Serif SC', 'Courier New', monospace;
+      backdrop-filter: blur(2px);
+      margin-bottom: 0.4rem;
+    }
+    .date-tag {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.1rem;
+      color: #5f4d34;
+      background: #efe7da;
+      padding: 0.3rem 1.8rem;
+      border-radius: 40px;
+      border: 1px solid #cbbc9e;
+      letter-spacing: 1px;
+    }
+
+    /* 节气卡片 */
+    .term-card {
+      background: #e6ddcb;
+      border-radius: 80px 20px 80px 20px;
+      padding: 1.5rem 1.8rem;
+      margin: 2rem 0 1.8rem;
+      border-left: 6px solid #a0845c;
+      border-right: 2px solid #b6a282;
+      background: linear-gradient(135deg, #ede3d1, #dfd4be);
+      box-shadow: 0 6px 14px rgba(70, 55, 35, 0.12);
+    }
+    .term-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem 0.2rem;
+    }
+    .term-label {
+      font-size: 0.9rem;
+      color: #5b4a32;
+      letter-spacing: 2px;
+      font-weight: 400;
+    }
+    .term-name {
+      font-size: 2.6rem;
+      font-weight: 500;
+      color: #382e1e;
+      letter-spacing: 8px;
+      line-height: 1.2;
+    }
+    .term-name small {
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #6f5b3e;
+      margin-left: 0.6rem;
+    }
+    .countdown-box {
+      background: #f2ecdf;
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+      border: 1px solid #cbb692;
+      box-shadow: inset 0 1px 4px #faf3e2;
+      min-width: 130px;
+      text-align: center;
+    }
+    .countdown-number {
+      font-size: 1.8rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #2f2417;
+      font-family: 'Noto Serif SC', monospace;
+    }
+    .countdown-label {
+      font-size: 0.75rem;
+      color: #6d5a3d;
+      display: block;
+      margin-top: -2px;
+    }
+
+    /* 节气列表装饰 */
+    .sub-term-hint {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      color: #5f4d34;
+      font-size: 0.95rem;
+      background: rgba(220, 208, 186, 0.3);
+      padding: 0.6rem 0.8rem;
+      border-radius: 48px;
+      border: 1px dashed #bcab8b;
+      margin-top: 0.2rem;
+    }
+    .sub-term-hint span {
+      background: #eee5d4;
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      border: 1px solid #bbaa88;
+    }
+
+        /* 留言板嵌入区域 — Giscus */
+    .giscus-placeholder {
+      margin-top: 2.8rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid #cbbc9e;
+    }
+    .giscus-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #4f3f2b;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+    }
+    .giscus-label i {
+      font-size: 1.4rem;
+    }
+    #giscusContainer {
+      background: #f2ecdf;
+      border-radius: 28px;
+      padding: 1.2rem 0.8rem;
+      border: 1px solid #cbb692;
+      min-height: 100px;
+    }
+    /* 响应式 */
+    @media (max-width: 520px) {
+      .container { padding: 1.8rem 1.2rem; }
+      .digital-clock { font-size: 2.8rem; letter-spacing: 4px; padding: 0.2rem 1rem; }
+      .term-name { font-size: 2.2rem; }
+      .header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 头部：节气钟＋当前节气小标签 -->
+  <div class="header">
+    <h1>☯ 节气钟 <small>· 廿四</small></h1>
+    <span class="chinese-now" id="currentTermTag">立春</span>
+  </div>
+
+  <!-- 时钟与日期 -->
+  <div class="clock-section">
+    <div class="digital-clock" id="clockDisplay">00:00:00</div>
+    <div class="date-tag" id="dateDisplay">乙巳年 · 正月廿三</div>
+  </div>
+
+  <!-- 当前节气 + 倒计时 -->
+  <div class="term-card" id="termCard">
+    <div class="term-row">
+      <div>
+        <div class="term-label">🌿 今时节气</div>
+        <div class="term-name" id="solarTermName">立春 <small>正月节</small></div>
+      </div>
+      <div class="countdown-box">
+        <div class="countdown-number" id="countdownDays">--</div>
+        <span class="countdown-label">距 ～ 雨水 ～</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 补充节气美感: 最近三个节气提示 (静态但随JS更新) -->
+  <div class="sub-term-hint" id="termHintWrap">
+    <span id="prevTermHint">❀ 大寒</span>
+    <span id="currentTermHint">● 立春</span>
+    <span id="nextTermHint">➜ 雨水</span>
+  </div>
+
+    <!-- 留言板 · Giscus 嵌入 -->
+  <div class="giscus-placeholder">
+    <div class="giscus-label">💬 留墨 · 闲话廿四</div>
+    <div id="giscusContainer">
+      <script src="https://giscus.app/client.js"
+        data-repo="uu-er521/24-solar-term"
+        data-repo-id="R_kgDOSgojcA"
+        data-category="General"
+        data-category-id="DIC_kwDOSgojcM4C-AJ6"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    "use strict";
+
+    // ---------- 二十四节气数据 (2025~2026 近似) ----------
+    // 为了演示，构建一个节气列表（此处包含年份+节气名称+大约日期）
+    // 实际项目可扩展为精确计算，这里用近似太阳黄经 + 固定日期
+    // 只做展示用，动态计算下一个节气
+    
+    // 常用节气名称（顺序）
+    const TERM_NAMES = [
+      "立春", "雨水", "惊蛰", "春分", "清明", "谷雨",
+      "立夏", "小满", "芒种", "夏至", "小暑", "大暑",
+      "立秋", "处暑", "白露", "秋分", "寒露", "霜降",
+      "立冬", "小雪", "大雪", "冬至", "小寒", "大寒"
+    ];
+
+    // 节气对应月/日近似 (非天文精确，但足够演示, 基于2025-2026平均值)
+    const TERM_MONTH_DAY = [
+      [2,3], [2,18], [3,5], [3,20], [4,4], [4,19],
+      [5,5], [5,21], [6,5], [6,21], [7,7], [7,22],
+      [8,7], [8,23], [9,7], [9,23], [10,8], [10,23],
+      [11,7], [11,22], [12,7], [12,21], [1,5], [1,20]
+    ];
+
+    // 辅助：获取某年某节气对应日期对象 (month 0-index)
+    function getTermDate(year, termIndex) {
+      const [m, d] = TERM_MONTH_DAY[termIndex];
+      let month = m - 1; // 0-index
+      let day = d;
+      // 跨年处理: 小寒、大寒属于下一年 (index 22,23) 
+      // 但是我们按公历年份，立春开始为当年，小寒大寒算到下一年1月
+      let y = year;
+      if (termIndex >= 22) { // 小寒(22), 大寒(23) 在下一年1月
+        y = year + 1;
+      }
+      return new Date(y, month, day, 12, 0, 0); // 中午12点 (避免日期边界)
+    }
+
+    // 找到当前最近的节气 (上一个/下一个)
+    function getCurrentSolarTermInfo(nowDate) {
+      const year = nowDate.getFullYear();
+      // 构建从去年立春到明年大寒的范围 (安全)
+      let candidates = [];
+      // 从去年开始考虑 小寒大寒可能跨年
+      for (let y = year - 1; y <= year + 1; y++) {
+        for (let i = 0; i < 24; i++) {
+          let d = getTermDate(y, i);
+          candidates.push({ date: d, index: i, name: TERM_NAMES[i] });
+        }
+      }
+      // 排序
+      candidates.sort((a,b) => a.date - b.date);
+      
+      // 找出当前时间之后的第一个节气 (下一个)
+      let next = null;
+      let prev = null;
+      for (let i = 0; i < candidates.length; i++) {
+        if (candidates[i].date > nowDate) {
+          next = candidates[i];
+          if (i > 0) prev = candidates[i-1];
+          break;
+        }
+      }
+      // 如果没找到 (极端情况) 取最后一个
+      if (!next) {
+        prev = candidates[candidates.length-2];
+        next = candidates[candidates.length-1];
+      }
+      // 如果prev为空，则取next前一个
+      if (!prev) {
+        let idx = candidates.indexOf(next);
+        if (idx > 0) prev = candidates[idx-1];
+        else prev = next; // fallback
+      }
+      return { prev, next, current: prev }; // current指上一个节气（当前所处节气）
+    }
+
+    // ----- DOM 刷新 -----
+    const clockEl = document.getElementById('clockDisplay');
+    const dateEl = document.getElementById('dateDisplay');
+    const termNameEl = document.getElementById('solarTermName');
+    const countdownEl = document.getElementById('countdownDays');
+    const currentTermTag = document.getElementById('currentTermTag');
+    const prevHint = document.getElementById('prevTermHint');
+    const currentHint = document.getElementById('currentTermHint');
+    const nextHint = document.getElementById('nextTermHint');
+
+    // 更新时钟与节气
+    function updateTimeAndTerms() {
+      const now = new Date();
+
+      // 1. 时间显示 HH:MM:SS
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      clockEl.textContent = `${hh}:${mm}:${ss}`;
+
+      // 2. 农历日期（模拟，因无真实农历库，用月+日加中国味）
+      const y = now.getFullYear();
+      const m = now.getMonth() + 1;
+      const d = now.getDate();
+      // 简单干支模拟（仅供美感）
+      const stems = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+      const branches = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+      const yearStem = stems[(y - 4) % 10];
+      const yearBranch = branches[(y - 4) % 12];
+      const lunarDay = `廿${d}`; // 粗陋
+      dateEl.textContent = `${yearStem}${yearBranch}年 · ${m}月${d}日`;
+
+      // 3. 节气核心逻辑
+      const info = getCurrentSolarTermInfo(now);
+      const currentTerm = info.current; // 当前所在节气（上一个）
+      const nextTerm = info.next;
+
+      // 更新当前节气名称 + 小标签
+      const curName = currentTerm.name;
+      const nextName = nextTerm.name;
+      termNameEl.innerHTML = `${curName} <small>· ${nextName}前</small>`;
+      currentTermTag.textContent = curName;
+
+      // 倒计时 (距离下一个节气)
+      const diffMs = nextTerm.date.getTime() - now.getTime();
+      let diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      let diffHours = Math.floor((diffMs % (1000*60*60*24)) / (1000*60*60));
+      // 格式： X天X时 或者 如果小于1天显示小时
+      let countdownStr = '';
+      if (diffDays > 0) {
+        countdownStr = `${diffDays}天${diffHours}时`;
+      } else {
+        const diffMin = Math.floor((diffMs % (1000*60*60)) / (1000*60));
+        countdownStr = `${diffHours}时${diffMin}分`;
+      }
+      countdownEl.textContent = countdownStr;
+
+      // 上下三个节气提示 (prev, current, next)
+      // 需保证prev/current/next 不重复
+      const prevTerm = info.prev;
+      if (prevTerm && prevTerm.name !== currentTerm.name) {
+        prevHint.textContent = `❀ ${prevTerm.name}`;
+      } else {
+        // 如果一致，再往前找一个
+        const candidates = [];
+        const year = now.getFullYear();
+        for (let y = year-1; y <= year+1; y++) {
+          for (let i = 0; i < 24; i++) {
+            candidates.push({ date: getTermDate(y, i), index: i, name: TERM_NAMES[i] });
+          }
+        }
+        candidates.sort((a,b)=>a.date-b.date);
+        let idx = candidates.findIndex(c => c.name === currentTerm.name && c.date <= now);
+        if (idx > 0) {
+          prevHint.textContent = `❀ ${candidates[idx-1].name}`;
+        } else {
+          prevHint.textContent = `❀ ${currentTerm.name}`;
+        }
+      }
+      currentHint.textContent = `● ${currentTerm.name}`;
+      nextHint.textContent = `➜ ${nextTerm.name}`;
+
+      // 每秒钟更新倒计时，但为了避免频繁重绘可优化，但保留。
+      // 每秒钟刷新，倒计时数字变化。
+    }
+
+    // 更新时钟显示 && 倒计时 (每秒)
+    function tick() {
+      updateTimeAndTerms();
+    }
+    
+    tick(); // 首次
+    setInterval(tick, 1000);
+  })();
+</script>
+
+
+
+</body>
+</html>

@@ -745,6 +745,193 @@
             font-size: 2rem;
             cursor: pointer;
         }
+                /* ===== 节气钟样式 ===== */
+        .solar-clock-section {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto 2.5rem;
+            background: rgba(252, 249, 240, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 48px 48px 40px 40px;
+            padding: 2rem 1.8rem 2.2rem;
+            box-shadow: 0 20px 40px -12px rgba(90, 70, 50, 0.3), inset 0 1px 4px rgba(255, 245, 225, 0.8);
+            border: 1px solid #d6cbb4;
+            font-family: 'Noto Serif SC', '华文楷体', 'KaiTi', 'SimSun', serif;
+        }
+        .solar-clock-section .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 2px solid #b7a88b;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .solar-clock-section .header h1 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: 6px;
+            color: #4f3f2b;
+            text-shadow: 2px 2px 0 rgba(180, 150, 120, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin: 0;
+        }
+        .solar-clock-section .header h1 small {
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #7b6a51;
+            margin-left: 0.6rem;
+        }
+        .solar-clock-section .chinese-now {
+            font-size: 1rem;
+            background: #dacfba;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            color: #3f3322;
+            border: 1px solid #c0af91;
+            box-shadow: inset 0 1px 3px rgba(255, 242, 220, 0.6);
+            white-space: nowrap;
+        }
+        .clock-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.6rem;
+        }
+        .clock-display .digital-clock {
+            font-size: 3.6rem;
+            font-weight: 400;
+            letter-spacing: 8px;
+            color: #2d2419;
+            background: #ece4d5;
+            padding: 0.2rem 1.8rem 0.2rem 2.2rem;
+            border-radius: 60px;
+            display: inline-block;
+            border: 1px solid #cbbca2;
+            box-shadow: inset 0 2px 6px rgba(110, 85, 60, 0.08), 0 6px 12px rgba(100, 80, 55, 0.08);
+            font-family: 'Noto Serif SC', 'Courier New', monospace;
+            backdrop-filter: blur(2px);
+            margin-bottom: 0.4rem;
+        }
+        .clock-display .date-tag {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 1.05rem;
+            color: #5f4d34;
+            background: #efe7da;
+            padding: 0.3rem 1.8rem;
+            border-radius: 40px;
+            border: 1px solid #cbbc9e;
+            letter-spacing: 1px;
+        }
+        .solar-term-card {
+            background: #e6ddcb;
+            border-radius: 80px 20px 80px 20px;
+            padding: 1.4rem 1.6rem;
+            margin: 1.6rem 0 1.4rem;
+            border-left: 6px solid #a0845c;
+            border-right: 2px solid #b6a282;
+            background: linear-gradient(135deg, #ede3d1, #dfd4be);
+            box-shadow: 0 6px 14px rgba(70, 55, 35, 0.12);
+        }
+        .solar-term-card .term-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem 0.2rem;
+        }
+        .solar-term-card .term-label {
+            font-size: 0.9rem;
+            color: #5b4a32;
+            letter-spacing: 2px;
+            font-weight: 400;
+        }
+        .solar-term-card .term-name {
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: #382e1e;
+            letter-spacing: 8px;
+            line-height: 1.2;
+        }
+        .solar-term-card .term-name small {
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            color: #6f5b3e;
+            margin-left: 0.6rem;
+        }
+        .solar-term-card .countdown-box {
+            background: #f2ecdf;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid #cbb692;
+            box-shadow: inset 0 1px 4px #faf3e2;
+            min-width: 130px;
+            text-align: center;
+        }
+        .solar-term-card .countdown-number {
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #2f2417;
+            font-family: 'Noto Serif SC', monospace;
+        }
+        .solar-term-card .countdown-label {
+            font-size: 0.75rem;
+            color: #6d5a3d;
+            display: block;
+            margin-top: -2px;
+        }
+        .sub-term-hint {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            color: #5f4d34;
+            font-size: 0.92rem;
+            background: rgba(220, 208, 186, 0.3);
+            padding: 0.6rem 0.8rem;
+            border-radius: 48px;
+            border: 1px dashed #bcab8b;
+            margin-top: 0.2rem;
+        }
+        .sub-term-hint span {
+            background: #eee5d4;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            border: 1px solid #bbaa88;
+        }
+        /* 留言板嵌入区域 — Giscus */
+        .giscus-placeholder {
+            margin-top: 2.4rem;
+            padding-top: 1.6rem;
+            border-top: 1px solid #cbbc9e;
+        }
+        .giscus-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #4f3f2b;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+        }
+        #giscusContainer {
+            background: #f2ecdf;
+            border-radius: 28px;
+            padding: 1rem 0.8rem;
+            border: 1px solid #cbb692;
+            min-height: 100px;
+        }
+        @media (max-width: 520px) {
+            .solar-clock-section { padding: 1.5rem 1rem; }
+            .solar-clock-section .digital-clock { font-size: 2.6rem; letter-spacing: 4px; padding: 0.2rem 1rem; }
+            .solar-clock-section .term-name { font-size: 2rem; }
+            .solar-clock-section .header h1 { font-size: 1.5rem; }
+        }
         footer {
             text-align: center;
             padding: 3rem 2rem 2rem;
@@ -920,7 +1107,60 @@
         <div class="flower-item" style="color:#b3772e;"><span>🏔️</span><h4>大寒三候</h4><p>一候鸡始乳<br>二候征鸟厉疾<br>三候水泽腹坚</p></div>
     </div>
 
-    </div>  <!-- /container -->
+        </div>  <!-- /container -->
+
+    <!-- ===== 节气钟 + 留言板 ===== -->
+    <div class="solar-clock-section" id="solarClockSection">
+        <div class="header">
+            <h1>☯ 节气钟 <small>· 廿四</small></h1>
+            <span class="chinese-now" id="currentTermTag">立春</span>
+        </div>
+
+        <div class="clock-display">
+            <div class="digital-clock" id="clockDisplay">00:00:00</div>
+            <div class="date-tag" id="dateDisplay">乙巳年 · 正月廿三</div>
+        </div>
+
+        <div class="solar-term-card">
+            <div class="term-row">
+                <div>
+                    <div class="term-label">🌿 今时节气</div>
+                    <div class="term-name" id="solarTermName">立春 <small>正月节</small></div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-number" id="countdownDays">--</div>
+                    <span class="countdown-label">距 ～ 雨水 ～</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-term-hint">
+            <span id="prevTermHint">❀ 大寒</span>
+            <span id="currentTermHint">● 立春</span>
+            <span id="nextTermHint">➜ 雨水</span>
+        </div>
+
+        <div class="giscus-placeholder">
+            <div class="giscus-label">💬 留墨 · 闲话廿四</div>
+            <div id="giscusContainer">
+                <script src="https://giscus.app/client.js"
+                    data-repo="uu-er521/24-solar-term"
+                    data-repo-id="R_kgDOSgojcA"
+                    data-category="General"
+                    data-category-id="DIC_kwDOSgojcM4C-AJ6"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="preferred_color_scheme"
+                    data-lang="zh-CN"
+                    crossorigin="anonymous"
+                    async>
+                </script>
+            </div>
+        </div>
+    </div>
 
 <footer>
     <button class="back-to-top" id="backToTopBtn" aria-label="返回顶部">
@@ -1181,7 +1421,75 @@
             const opacity = Math.max(0, 1 - scrolled / 800);
             hero.style.opacity = opacity;
         }
-    });
+        });
+
+    // ===== 节气钟 JS =====
+    (function() {
+        "use strict";
+        const TERM_NAMES = ["立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至","小寒","大寒"];
+        const TERM_MONTH_DAY = [[2,3],[2,18],[3,5],[3,20],[4,4],[4,19],[5,5],[5,21],[6,5],[6,21],[7,7],[7,22],[8,7],[8,23],[9,7],[9,23],[10,8],[10,23],[11,7],[11,22],[12,7],[12,21],[1,5],[1,20]];
+        function getTermDate(year, termIndex) {
+            const [m, d] = TERM_MONTH_DAY[termIndex];
+            let month = m - 1, day = d, y = year;
+            if (termIndex >= 22) y = year + 1;
+            return new Date(y, month, day, 12, 0, 0);
+        }
+        function getCurrentSolarTermInfo(nowDate) {
+            const year = nowDate.getFullYear();
+            let candidates = [];
+            for (let y = year - 1; y <= year + 1; y++)
+                for (let i = 0; i < 24; i++)
+                    candidates.push({ date: getTermDate(y, i), index: i, name: TERM_NAMES[i] });
+            candidates.sort((a,b) => a.date - b.date);
+            let next = null, prev = null;
+            for (let i = 0; i < candidates.length; i++) {
+                if (candidates[i].date > nowDate) { next = candidates[i]; if (i > 0) prev = candidates[i-1]; break; }
+            }
+            if (!next) { prev = candidates[candidates.length-2]; next = candidates[candidates.length-1]; }
+            if (!prev) { let idx = candidates.indexOf(next); if (idx > 0) prev = candidates[idx-1]; else prev = next; }
+            return { prev, next, current: prev };
+        }
+        const clockEl = document.getElementById('clockDisplay');
+        const dateEl = document.getElementById('dateDisplay');
+        const termNameEl = document.getElementById('solarTermName');
+        const countdownEl = document.getElementById('countdownDays');
+        const currentTermTag = document.getElementById('currentTermTag');
+        const prevHint = document.getElementById('prevTermHint');
+        const currentHint = document.getElementById('currentTermHint');
+        const nextHint = document.getElementById('nextTermHint');
+        if (!clockEl) return;
+        function updateTimeAndTerms() {
+            const now = new Date();
+            const hh = String(now.getHours()).padStart(2,'0'), mm = String(now.getMinutes()).padStart(2,'0'), ss = String(now.getSeconds()).padStart(2,'0');
+            clockEl.textContent = hh+':'+mm+':'+ss;
+            const y = now.getFullYear(), m = now.getMonth()+1, d = now.getDate();
+            const stems = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'], branches = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+            const yearStem = stems[(y-4)%10], yearBranch = branches[(y-4)%12];
+            dateEl.textContent = yearStem+yearBranch+'年 · '+m+'月'+d+'日';
+            const info = getCurrentSolarTermInfo(now);
+            const currentTerm = info.current, nextTerm = info.next;
+            termNameEl.innerHTML = currentTerm.name+' <small>· '+nextTerm.name+'前</small>';
+            currentTermTag.textContent = currentTerm.name;
+            const diffMs = nextTerm.date.getTime() - now.getTime();
+            let diffDays = Math.floor(diffMs/(1000*60*60*24)), diffHours = Math.floor((diffMs%(1000*60*60*24))/(1000*60*60));
+            let countdownStr = diffDays > 0 ? diffDays+'天'+diffHours+'时' : diffHours+'时'+Math.floor((diffMs%(1000*60*60))/(1000*60))+'分';
+            countdownEl.textContent = countdownStr;
+            const prevTerm = info.prev;
+            if (prevTerm && prevTerm.name !== currentTerm.name) prevHint.textContent = '❀ '+prevTerm.name;
+            else {
+                const candidates = [];
+                const year = now.getFullYear();
+                for (let y = year-1; y <= year+1; y++) for (let i = 0; i < 24; i++) candidates.push({ date: getTermDate(y,i), index: i, name: TERM_NAMES[i] });
+                candidates.sort((a,b)=>a.date-b.date);
+                let idx = candidates.findIndex(c => c.name === currentTerm.name && c.date <= now);
+                prevHint.textContent = '❀ '+(idx > 0 ? candidates[idx-1].name : currentTerm.name);
+            }
+            currentHint.textContent = '● '+currentTerm.name;
+            nextHint.textContent = '➜ '+nextTerm.name;
+        }
+        updateTimeAndTerms();
+        setInterval(updateTimeAndTerms, 1000);
+    })();
 </script>
 </body>
 </html>
