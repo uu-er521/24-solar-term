@@ -34,7 +34,7 @@
             height: 100vh;
             min-height: 700px;
             /* 图片资源统一放在与 index.html 同级的 image/、backgrounds/、custom-image/ 目录 */
-            background: url('../image/背景图雨水.jpg') center/cover no-repeat fixed;
+            background: url('../image/背景图雨水.webp') center/cover no-repeat fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -519,7 +519,8 @@
             border-bottom-right-radius: 40px;
         }
         .heritage-block:hover,
-        .heritage-block:focus-within {
+        /* 键鼠区分：仅键盘聚焦时保持展开，鼠标点击后移出即回到常态 */
+.heritage-block:focus-visible {
             flex: 6 1 0;
             transform: translateY(-28px) rotateX(10deg) rotateY(2deg) scale(1.08);
             box-shadow: 0 50px 140px rgba(0,0,0,0.34);
@@ -594,7 +595,7 @@
             gap: 0.6rem;
         }
         .heritage-block:hover .block-extra,
-        .heritage-block:focus-within .block-extra {
+        .heritage-block:focus-visible .block-extra {
             transform: translateY(0);
             opacity: 1;
         }
@@ -625,7 +626,7 @@
                 min-width: calc(33.333% - 0.75rem);
             }
             .heritage-block:hover,
-            .heritage-block:focus-within {
+            .heritage-block:focus-visible {
                 flex: 1 1 calc(33.333% - 0.75rem);
             }
         }
@@ -634,7 +635,7 @@
                 min-width: calc(50% - 0.75rem);
             }
             .heritage-block:hover,
-            .heritage-block:focus-within {
+            .heritage-block:focus-visible {
                 flex: 1 1 calc(50% - 0.75rem);
             }
         }
@@ -649,7 +650,7 @@
                 flex: 0 0 80vw;
             }
             .heritage-block:hover,
-            .heritage-block:focus-within {
+            .heritage-block:focus-visible {
                 flex: 0 0 90vw;
             }
         }
@@ -662,7 +663,7 @@
                 flex: 1 1 auto;
             }
             .heritage-block:hover,
-            .heritage-block:focus-within {
+            .heritage-block:focus-visible {
                 transform: none;
             }
         }
@@ -741,7 +742,7 @@
             font-size: 2rem;
             cursor: pointer;
         }
-                /* ===== 节气钟样式 — 中国风·以节气钟.jpg为背景 ===== */
+                /* ===== 节气钟样式 — 中国风·以节气钟.webp为背景 ===== */
                 .solar-clock-section {
                     position: relative;
                     max-width: 760px;
@@ -753,11 +754,11 @@
                                 0 0 0 1px rgba(200, 178, 148, 0.5);
                     font-family: 'Noto Serif SC', '华文楷体', 'KaiTi', 'SimSun', serif;
                 }
-                /* 背景图 — 节气钟.jpg 全幅铺满 */
+                /* 背景图 — 节气钟.webp 全幅铺满 */
                 .solar-clock-section .clock-bg-layer {
                     position: absolute;
                     inset: 0;
-                    background-image: url('../image/节气钟.jpg');
+                    background-image: url('../image/节气钟.webp');
                     background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;
@@ -1036,7 +1037,7 @@
             inset: 0;
             z-index: 9999;
             background: #000;
-            background-image: url('../image/节气钟全屏.jpg');
+            background-image: url('../image/节气钟全屏.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;

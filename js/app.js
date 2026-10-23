@@ -56,7 +56,7 @@
             const customIcon = termIcons[term.name] || '🤲';
             html += `
                 <div class="card" data-idx="${idx}">
-                    <div class="card-image"><img src="./image/${idx + 1}.${term.name}.png" alt="${term.name}" loading="lazy" decoding="async"></div>
+                    <div class="card-image"><img src="./image/${idx + 1}.${term.name}.webp" alt="${term.name}" loading="lazy" decoding="async"></div>
                     <div class="season-icon">${seasonIcon}</div>
                     <h3>${term.name}</h3>
                     <div class="card-date">${term.date}</div>
@@ -106,7 +106,7 @@
     let currentFullIdx = -1;
     function updateFullContent(term, idx) {
         const view = document.getElementById('termFullView');
-        const bgPath = `./backgrounds/${idx + 1}.${term.name}bg.jpg`;
+        const bgPath = `./backgrounds/${idx + 1}.${term.name}bg.webp`;
         view.style.backgroundImage = `url('${bgPath}')`;
         document.getElementById('termFullIndex').innerText = idx + 1;
         document.getElementById('termFullName').innerText = term.name;
@@ -159,7 +159,7 @@
         if (!thumbList) return;
                 thumbList.innerHTML = solarTerms.map((term, idx) => `
             <div class="nav-thumb" data-idx="${idx}">
-                <div class="thumb-image" style="background-image:url('./image/${idx + 1}.${term.name}.png')"></div>
+                <div class="thumb-image" style="background-image:url('./image/${idx + 1}.${term.name}.webp')"></div>
                 <div class="thumb-label">
                     <strong>${idx + 1}. ${term.name}</strong>
                     <small>${term.date}</small>
@@ -211,8 +211,8 @@
         const heritageBar = document.getElementById('heritageBar');
         if (!heritageBar) return;
         heritageBar.innerHTML = heritageItems.map((item, index) => {
-            const mainImage = `./custom-image/习俗${index + 1}.1.jpg`;
-            const hoverImage = `./custom-image/习俗${index + 1}.2.jpg`;
+            const mainImage = `./custom-image/习俗${index + 1}.1.webp`;
+            const hoverImage = `./custom-image/习俗${index + 1}.2.webp`;
             return `
                 <div class="heritage-block" tabindex="0" role="listitem">
                     <div class="block-image" style="background-image:url('${mainImage}')"></div>
@@ -228,6 +228,13 @@
                 </div>
             `;
         }).join('');
+
+        // 鼠标点击后主动失焦：移出鼠标即回到原始状态；键盘操作（detail === 0）保留焦点
+        heritageBar.querySelectorAll('.heritage-block').forEach((el) => {
+            el.addEventListener('click', (ev) => {
+                if (ev.detail > 0) el.blur();
+            });
+        });
     }
 
     // 滚动引导

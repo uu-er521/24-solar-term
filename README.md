@@ -19,9 +19,9 @@
 ├── index.html              # 页面结构（约 240 行）
 ├── css/style.css           # 样式、动效、响应式、抽屉与无障碍
 ├── js/app.js               # 节气数据、算法、渲染与交互
-├── image/                  # 24 张节气插画（1.立春.png ~ 24.大寒.png）、节气钟背景、首屏背景
-├── backgrounds/            # 24 张节气氛围实景（1.立春bg.jpg ~ 24.大寒bg.jpg）
-├── custom-image/           # 11 项节气相关非遗项目实景图（习俗X.1.jpg 主图 / 习俗X.2.jpg 悬停图）
+├── image/                  # 24 张节气插画（1.立春.webp ~ 24.大寒.webp）、节气钟背景、首屏背景
+├── backgrounds/            # 24 张节气氛围实景（1.立春bg.webp ~ 24.大寒bg.webp）
+├── custom-image/           # 11 项节气相关非遗项目实景图（习俗X.1.webp 主图 / 习俗X.2.webp 悬停图）
 ├── content/                # 文案素材（节气文案两版、七十二候原文）
 └── README.md
 ```
@@ -44,7 +44,7 @@
 ## 四、数据与算法说明
 
 - `solarTerms[]`：24 条记录，字段 `name / date / season / shortDesc / custom / longDesc / content / poem`。
-- `heritageItems[]`：11 条非遗记录，字段 `name / desc / detail`，对应 `custom-image/习俗{n}.1.jpg` 与 `.2.jpg`。
+- `heritageItems[]`：11 条非遗记录，字段 `name / desc / detail`，对应 `custom-image/习俗{n}.1.webp` 与 `.2.webp`。
 - `getTermDate(year, i)`：由太阳视黄经以牛顿迭代逼近节气时刻；`getCurrentSolarTermInfo()` 返回当前、上一与下一节气。
 - **节气日期口径**：网格卡片上的「2 月 3 日—5 日」为常见日期区间；节气钟显示的节气时刻来自上述推算，两者用途不同，不构成同一数据的两套结论。
 - **干支说明**：节气钟显示的「干支纪年／月／日」为界面装饰性近似换算（月柱按公历月份换算，未按交节分界；日柱以 2000-01-01 为基准日推算），**不是农历月日**，也不用于任何文化结论的核算。
